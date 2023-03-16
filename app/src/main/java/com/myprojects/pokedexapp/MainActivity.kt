@@ -11,9 +11,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.myprojects.pokedexapp.navigation.NavigationComponent
 import com.myprojects.pokedexapp.ui.theme.PokedexAppTheme
-import com.myprojects.pokedexapp.ui.theme.home.HomeScreen
-import com.myprojects.pokedexapp.ui.theme.home.HomeViewModel
+import com.myprojects.pokedexapp.presentation.home.HomeScreen
+import com.myprojects.pokedexapp.presentation.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,13 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PokedexAppTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                        HomeScreen(homeViewModel = homeViewModel)
-
-                }
+                NavigationComponent(navHostController = rememberNavController(), homeViewModel = homeViewModel )
             }
         }
     }

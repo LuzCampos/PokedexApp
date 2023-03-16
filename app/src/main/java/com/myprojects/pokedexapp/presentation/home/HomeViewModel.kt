@@ -1,4 +1,4 @@
-package com.myprojects.pokedexapp.ui.theme.home
+package com.myprojects.pokedexapp.presentation.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -11,8 +11,17 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val pokedexRepository: PokedexRepository) : ViewModel() {
 
     val pokemonesLista : LiveData<List<PokemonEntity>> = pokedexRepository.pokemones
+    val pokemon : LiveData<PokemonEntity> = pokedexRepository.getpokemon
+
+    init {
+        getPokemons()
+    }
 
     fun getPokemons(){
         pokedexRepository.getAllPokemons()
+    }
+
+    fun getPokemonById(pokemonId: Int) {
+        pokedexRepository.getPokemon(pokemonId)
     }
 }
