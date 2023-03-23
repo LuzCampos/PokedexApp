@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PokedexApp</string>
+    <string name="msg_try_again">Intentar nuevamente</string>
+    <string name="msg_error_generic">Hubo un error</string>
 </resources>

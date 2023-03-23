@@ -1,10 +1,17 @@
-package com.myprojects.pokedexapp.presentation.home
+package com.myprojects.pokedexapp.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.myprojects.pokedexapp.PokedexScreenState
 import com.myprojects.pokedexapp.data.PokemonEntity
 import com.myprojects.pokedexapp.repository.PokedexRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -13,15 +20,21 @@ class HomeViewModel @Inject constructor(private val pokedexRepository: PokedexRe
     val pokemonesLista : LiveData<List<PokemonEntity>> = pokedexRepository.pokemones
     val pokemon : LiveData<PokemonEntity> = pokedexRepository.getpokemon
 
+    private val _uiState = MutableLiveData<PokedexScreenState>()
+    val uiState: LiveData<PokedexScreenState> = _uiState
+
     init {
-        getPokemons()
+            getPokemons()
     }
 
     fun getPokemons(){
-        pokedexRepository.getAllPokemons()
+        viewModelScope.launch {
+            _uiState.value = pokedexRepository.getAllPokemons()
+        }
     }
 
     fun getPokemonById(pokemonId: Int) {
         pokedexRepository.getPokemon(pokemonId)
     }
+
 }
