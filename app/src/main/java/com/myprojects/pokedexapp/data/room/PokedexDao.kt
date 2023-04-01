@@ -11,4 +11,10 @@ interface PokedexDao {
 
     @Query("SELECT * FROM pokedex WHERE national_number = :national_number")
     fun getPokemonById(national_number: Int): PokemonEntity
+
+    @Query("SELECT * FROM pokedex WHERE gen =:gen")
+    fun getPokemonByGeneration(gen: String): List<PokemonEntity>
+
+    @Query("SELECT * FROM pokedex WHERE english_name LIKE :searchText")
+    fun searchPokemonsByName(searchText: String): List<PokemonEntity>
 }

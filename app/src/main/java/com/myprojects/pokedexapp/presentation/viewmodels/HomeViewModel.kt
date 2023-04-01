@@ -28,13 +28,29 @@ class HomeViewModel @Inject constructor(private val pokedexRepository: PokedexRe
     }
 
     fun getPokemons(){
+        pokedexRepository.getAllPokemons()
+    }
+
+  /*  fun getPokemons(){
         viewModelScope.launch {
             _uiState.value = pokedexRepository.getAllPokemons()
         }
-    }
+    }*/
+
+
 
     fun getPokemonById(pokemonId: Int) {
         pokedexRepository.getPokemon(pokemonId)
+    }
+
+    fun getPokemonByGeneration(generation: String) {
+        pokedexRepository.getPokemonByGeneration(generation)
+    }
+
+    fun searchPokemonByName(searchText:String){
+        viewModelScope.launch {
+            pokedexRepository.searchPokemonByName(searchText)
+        }
     }
 
 }

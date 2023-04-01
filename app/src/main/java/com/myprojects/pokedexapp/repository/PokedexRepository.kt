@@ -14,7 +14,13 @@ class PokedexRepository (private val pokedexDao: PokedexDao) {
     val getpokemon = MutableLiveData<PokemonEntity>()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
-    suspend fun getAllPokemons(): PokedexScreenState {
+    fun getAllPokemons(){
+        coroutineScope.launch {
+            pokemones.postValue(pokedexDao.obtenerPokemons())
+        }
+    }
+
+   /* suspend fun getAllPokemons(): PokedexScreenState {
         //coroutineScope.launch {
             return try {
                 val items = pokedexDao.obtenerPokemons()
@@ -28,11 +34,23 @@ class PokedexRepository (private val pokedexDao: PokedexDao) {
             }
            // pokemones.postValue(pokedexDao.obtenerPokemons())
         //}
-    }
+    }*/
 
     fun getPokemon(pokemonId: Int){
         coroutineScope.launch(Dispatchers.IO) {
             getpokemon.postValue(pokedexDao.getPokemonById(pokemonId))
+        }
+    }
+
+    fun searchPokemonByName(searchText: String) {
+        coroutineScope.launch(Dispatchers.IO) {
+            pokemones.postValue(pokedexDao.searchPokemonsByName("%$searchText%"))
+        }
+    }
+
+    fun getPokemonByGeneration(generation: String) {
+        coroutineScope.launch(Dispatchers.IO) {
+            pokemones.postValue(pokedexDao.getPokemonByGeneration(generation))
         }
     }
 }
