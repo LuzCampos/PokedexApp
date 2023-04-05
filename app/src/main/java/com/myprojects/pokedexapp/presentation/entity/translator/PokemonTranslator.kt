@@ -39,11 +39,9 @@ class PokemonTranslator {
             "poison" -> 0xFF7C538C
             "rock" -> 0xFFB1736C
             "fairy" -> 0xfff06292
-            "rock"-> 0xFFB1736C
-            "poison"-> 0xFF7C538C
             "dragon" -> 0xff9c27b0
-            "ghost"-> 0xff482880
-            "steel"-> 0xff9e9e9e
+            "ghost" -> 0xff482880
+            "steel" -> 0xff9e9e9e
             "normal" -> 0xff8d6e63
             "ground" -> 0xffffa733
             "psychic" -> 0xffec407a
@@ -867,6 +865,102 @@ fun getDrawableResourceFromNumber(number: Int): Int {
         807 -> R.drawable.pokemon_807
         808 -> R.drawable.pokemon_808
         809 -> R.drawable.pokemon_809
-        else -> R.drawable.pokeball
+        810 -> R.drawable.pokemon_810
+        811 -> R.drawable.pokemon_811
+        812 -> R.drawable.pokemon_812
+        813 -> R.drawable.pokemon_813
+        814 -> R.drawable.pokemon_814
+        815 -> R.drawable.pokemon_815
+        816 -> R.drawable.pokemon_816
+        817 -> R.drawable.pokemon_817
+        818 -> R.drawable.pokemon_818
+        819 -> R.drawable.pokemon_819
+        820 -> R.drawable.pokemon_820
+        821 -> R.drawable.pokemon_821
+        822 -> R.drawable.pokemon_822
+        823 -> R.drawable.pokemon_823
+        824 -> R.drawable.pokemon_824
+        825 -> R.drawable.pokemon_825
+        826 -> R.drawable.pokemon_826
+        827 -> R.drawable.pokemon_827
+        828 -> R.drawable.pokemon_828
+        829 -> R.drawable.pokemon_829
+        830 -> R.drawable.pokemon_830
+        831 -> R.drawable.pokemon_831
+        832 -> R.drawable.pokemon_832
+        833 -> R.drawable.pokemon_833
+        834 -> R.drawable.pokemon_834
+        835 -> R.drawable.pokemon_835
+        836 -> R.drawable.pokemon_836
+        837 -> R.drawable.pokemon_837
+        838 -> R.drawable.pokemon_838
+        839 -> R.drawable.pokemon_839
+        840 -> R.drawable.pokemon_840
+        841 -> R.drawable.pokemon_841
+        842 -> R.drawable.pokemon_842
+        843 -> R.drawable.pokemon_843
+        844 -> R.drawable.pokemon_844
+        845 -> R.drawable.pokemon_845
+        846 -> R.drawable.pokemon_846
+        847 -> R.drawable.pokemon_847
+        848 -> R.drawable.pokemon_848
+        849 -> R.drawable.pokemon_849
+        850 -> R.drawable.pokemon_850
+        851 -> R.drawable.pokemon_851
+        852 -> R.drawable.pokemon_852
+        853 -> R.drawable.pokemon_853
+        854 -> R.drawable.pokemon_854
+        855 -> R.drawable.pokemon_855
+        856 -> R.drawable.pokemon_856
+        857 -> R.drawable.pokemon_857
+        858 -> R.drawable.pokemon_858
+        859 -> R.drawable.pokemon_859
+        860 -> R.drawable.pokemon_860
+        861 -> R.drawable.pokemon_861
+        862 -> R.drawable.pokemon_862
+        863 -> R.drawable.pokemon_863
+        864 -> R.drawable.pokemon_864
+        865 -> R.drawable.pokemon_865
+        866 -> R.drawable.pokemon_866
+        867 -> R.drawable.pokemon_867
+        868 -> R.drawable.pokemon_868
+        869 -> R.drawable.pokemon_869
+        870 -> R.drawable.pokemon_870
+        871 -> R.drawable.pokemon_871
+        872 -> R.drawable.pokemon_872
+        873 -> R.drawable.pokemon_873
+        874 -> R.drawable.pokemon_874
+        875 -> R.drawable.pokemon_875
+        876 -> R.drawable.pokemon_876
+        877 -> R.drawable.pokemon_877
+        878 -> R.drawable.pokemon_878
+        879 -> R.drawable.pokemon_879
+        880 -> R.drawable.pokemon_880
+        881 -> R.drawable.pokemon_881
+        882 -> R.drawable.pokemon_882
+        883 -> R.drawable.pokemon_883
+        884 -> R.drawable.pokemon_884
+        885 -> R.drawable.pokemon_885
+        886 -> R.drawable.pokemon_886
+        887 -> R.drawable.pokemon_887
+        888 -> R.drawable.pokemon_888
+        889 -> R.drawable.pokemon_889
+        890 -> R.drawable.pokemon_890
+        891 -> R.drawable.pokemon_891
+        892 -> R.drawable.pokemon_892
+        893 -> R.drawable.pokemon_893
+        894 -> R.drawable.pokemon_894
+        895 -> R.drawable.pokemon_895
+        896 -> R.drawable.pokemon_896
+        897 -> R.drawable.pokemon_897
+        898 -> R.drawable.pokemon_898
+        899 -> R.drawable.pokemon_899
+        900 -> R.drawable.pokemon_900
+        901 -> R.drawable.pokemon_901
+        902 -> R.drawable.pokemon_902
+        903 -> R.drawable.pokemon_903
+        904 -> R.drawable.pokemon_904
+        905 -> R.drawable.pokemon_905
+        else -> android.R.drawable.screen_background_light_transparent
     }
 }
