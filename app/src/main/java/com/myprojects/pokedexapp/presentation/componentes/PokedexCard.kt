@@ -21,7 +21,7 @@ import com.myprojects.pokedexapp.presentation.entity.PokemonUi
 import java.util.*
 
 @Composable
-fun PokemonCard(pokemonUi: PokemonUi, onClickCard: () -> Unit){
+fun PokemonCard(pokemonUi: PokemonUi, onClickCard: () -> Unit) {
     Card(
         shape = RoundedCornerShape(24.dp),
         contentColor = Color.White,
@@ -29,13 +29,13 @@ fun PokemonCard(pokemonUi: PokemonUi, onClickCard: () -> Unit){
         backgroundColor = Color(pokemonUi.backgroundColorValue)
     )
     {
-        Box( modifier = Modifier
+        Box(modifier = Modifier
             .clickable { onClickCard() }
             .fillMaxWidth()
             .aspectRatio(1.4f)
         ) {
             PokeballImage(Modifier.align(Alignment.BottomEnd))
-            PokemonImage( pokemonUi.pokemonDrawableResourceId ,Modifier.align(Alignment.BottomEnd))
+            PokemonImage(pokemonUi.pokemonDrawableResourceId, Modifier.align(Alignment.BottomEnd))
             Text(
                 text = pokemonUi.getNumberFormatted(),
                 color = Color.Black.copy(.2f),
@@ -57,12 +57,12 @@ fun PokemonCard(pokemonUi: PokemonUi, onClickCard: () -> Unit){
                 Spacer(modifier = Modifier.padding(4.dp))
                 PowerChip(text = pokemonUi.primary_type)
                 Spacer(modifier = Modifier.padding(2.dp))
-                if (pokemonUi.secondary_type.isNotEmpty()){
+                if (pokemonUi.secondary_type.isNotEmpty()) {
                     PowerChip(text = pokemonUi.secondary_type)
                 }
                 //pokemonUi.pokemonTypes.map { pokemonType ->
-                  //  PowerChip(pokemonType.javaClass.simpleName)
-                   // Spacer(modifier = Modifier.padding(2.dp))
+                //  PowerChip(pokemonType.javaClass.simpleName)
+                // Spacer(modifier = Modifier.padding(2.dp))
                 //}
             }
         }
@@ -95,7 +95,9 @@ fun PokemonImage(
     Image(
         painter = painterResource(drawableResourceId),
         contentDescription = "Bulbasaur",
-        modifier = modifier.fillMaxWidth(.5f)
+        modifier = modifier
+            //.fillMaxWidth(.5f)
+            .size(width = 72.dp, height = 72.dp)
     )
 }
 
