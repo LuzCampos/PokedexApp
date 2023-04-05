@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.myprojects.pokedexapp.R
@@ -35,8 +36,8 @@ fun MultiFloatingButton(
     items: List<FabItem>,
     onClick1: () -> Unit,
     onClick2:()->Unit,
+    onClick3:()->Unit,
 ){
-
     Column (horizontalAlignment = Alignment.End) {
         if (multiFloatingState == MultiFloatingState.Expanded){
             items.forEach { 
@@ -53,7 +54,7 @@ fun MultiFloatingButton(
                                }
                                BottomSheetType.TYPE3.name -> {
                                    Toast.makeText(context, "GENERATION",Toast.LENGTH_SHORT).show()
-                                   onClick2()
+                                   onClick3()
                                }
                            }
                     }
@@ -109,7 +110,8 @@ fun filteritems(
         Row(modifier = Modifier.padding(horizontal = 18.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
             Text(text = fabItem.label, color = Color(0xff303943))
             Spacer(modifier = Modifier.size(12.dp))
-            Image(fabItem.icon,
+            Image(
+                ImageBitmap.imageResource(fabItem.icon),
                 contentDescription = "fav",
                 modifier = Modifier.size(14.dp)
             )

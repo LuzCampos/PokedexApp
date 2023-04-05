@@ -29,16 +29,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.myprojects.pokedexapp.PokedexScreenState
 import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.data.PokemonEntity
 import com.myprojects.pokedexapp.presentation.componentes.floatingbutton.MultiFloatingButton
 import com.myprojects.pokedexapp.presentation.componentes.PokedexGrid
 import com.myprojects.pokedexapp.presentation.componentes.floatingbutton.FabItem
 import com.myprojects.pokedexapp.presentation.componentes.floatingbutton.MultiFloatingState
-import com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet.BottomSheetType
-import com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet.Generation
-import com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet.SheetLayout
+import com.myprojects.pokedexapp.presentation.componentes.floatingbutton.items
+import com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet.*
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -48,42 +46,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen( navController: NavController, homeViewModel: HomeViewModel){
 
-    val uiState by homeViewModel.uiState.observeAsState()
+   // val uiState by homeViewModel.uiState.observeAsState()
 
     var multiFloatingState by remember {
         mutableStateOf(MultiFloatingState.Collapsed)
     }
 
     val context = LocalContext.current
-
-    var items = listOf(
-        FabItem(
-            icon = ImageBitmap.imageResource(id = R.drawable.favorite),
-            label = "Favorite Pokemon",
-            identifier = BottomSheetType.TYPE1.name
-        ),
-        FabItem(
-            icon = ImageBitmap.imageResource(id = R.drawable.pokeballicon),
-            label = "All Type",
-            identifier = BottomSheetType.TYPE1.name
-        ),
-        FabItem(
-            icon = ImageBitmap.imageResource(id = R.drawable.pokeballicon),
-            label = "All Gen",
-            identifier = BottomSheetType.TYPE3.name
-        )
-    )
-
-    var generations = listOf(
-        Generation(icon = ImageBitmap.imageResource(id = R.drawable.generation1), label = "Generation I","I"),
-        Generation(icon = ImageBitmap.imageResource(id = R.drawable.generation2), label = "Generation II","II"),
-        Generation(icon = ImageBitmap.imageResource(id = R.drawable.generation3), label = "Generation III","III"),
-        Generation(icon = ImageBitmap.imageResource(id = R.drawable.generation4), label = "Generation IV","IV"),
-        Generation(icon = ImageBitmap.imageResource(id = R.drawable.generation5), label = "Generation V","V"),
-        Generation(icon = ImageBitmap.imageResource(id = R.drawable.generation6), label = "Generation VI","VI"),
-        Generation(icon = ImageBitmap.imageResource(id = R.drawable.generation7), label = "Generation VII","VII"),
-        Generation(icon = ImageBitmap.imageResource(id = R.drawable.generation8), label = "Generation VIII","VIII"),
-    )
 
     val searchText = remember { mutableStateOf("") }
 
@@ -122,7 +91,7 @@ fun HomeScreen( navController: NavController, homeViewModel: HomeViewModel){
                     searchText = searchText,
                     homeViewModel = homeViewModel,
                     generation = generations,
-                    fabItemState = multiFloatingState
+                    type = types,
                 )
             }
         }
@@ -134,7 +103,7 @@ fun HomeScreen( navController: NavController, homeViewModel: HomeViewModel){
                         LazyRow() {
                             items(items = generations){
                                     gen -> Button(onClick = { homeViewModel.getPokemonByGeneration(gen.number) }) {
-                                Text(text = "${gen.number}")
+                                Text(text = gen.number)
                             }
                             }
                         }
@@ -168,6 +137,10 @@ fun HomeScreen( navController: NavController, homeViewModel: HomeViewModel){
                         currentBottomSheet = BottomSheetType.TYPE2
                         openSheet()
                     },
+                    onClick3 = {
+                        currentBottomSheet = BottomSheetType.TYPE3
+                        openSheet()
+                    },
                 )
             },
             content = {
@@ -177,62 +150,6 @@ fun HomeScreen( navController: NavController, homeViewModel: HomeViewModel){
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
-@Composable
-fun Screen1(closeSheet : () -> Unit, searchText:MutableState<String>, homeViewModel: HomeViewModel, fabItemState: MultiFloatingState) {
-
-    val showKeyboard = remember { mutableStateOf(true) }
-    val focusRequester = remember { FocusRequester() }
-    val keyboard = LocalSoftwareKeyboardController.current
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 26.dp, vertical = 20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            TextField(
-                shape = RoundedCornerShape(30.dp),
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color(0xffF1F1F1),
-                    cursorColor = Color(0xffA4A7AB),
-                    focusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                ),
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(R.drawable.searchicon),
-                        contentDescription = "",
-                        tint = Color(0xff303943),
-                        modifier = Modifier
-                            .size(20.dp)
-                            .padding(start = 4.dp)
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .focusRequester(focusRequester),
-                value = searchText.value,
-                onValueChange = { searchText.value = it; homeViewModel.searchPokemonByName(it) },
-                placeholder = { Text("Search Pokemon, Move, Ability etc", color = Color(0xffA4A7AB), fontSize = 14.sp, fontWeight = FontWeight.Bold) }
-            )
-
-            LaunchedEffect(focusRequester) {
-                if (showKeyboard.value) {
-                    focusRequester.requestFocus()
-                    delay(100)
-                    keyboard?.show()
-                }
-            }
-        }
-    }
-}
 
 @Composable
 fun PokedexSuccess(pokemons: List<PokemonEntity>, modifier: Modifier = Modifier,navController: NavController) {

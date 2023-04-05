@@ -15,6 +15,9 @@ interface PokedexDao {
     @Query("SELECT * FROM pokedex WHERE gen =:gen")
     fun getPokemonByGeneration(gen: String): List<PokemonEntity>
 
+    @Query("SELECT * FROM pokedex WHERE primary_type =:primary_type")
+    fun getPokemonByType(primary_type: String): List<PokemonEntity>
+
     @Query("SELECT * FROM pokedex WHERE english_name LIKE :searchText")
     fun searchPokemonsByName(searchText: String): List<PokemonEntity>
 }

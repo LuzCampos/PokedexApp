@@ -23,29 +23,15 @@ class HomeViewModel @Inject constructor(private val pokedexRepository: PokedexRe
     private val _uiState = MutableLiveData<PokedexScreenState>()
     val uiState: LiveData<PokedexScreenState> = _uiState
 
-    init {
-            getPokemons()
-    }
+    init { getPokemons() }
 
-    fun getPokemons(){
-        pokedexRepository.getAllPokemons()
-    }
+    fun getPokemons(){ pokedexRepository.getAllPokemons() }
 
-  /*  fun getPokemons(){
-        viewModelScope.launch {
-            _uiState.value = pokedexRepository.getAllPokemons()
-        }
-    }*/
+    fun getPokemonById(pokemonId: Int) { pokedexRepository.getPokemon(pokemonId) }
 
+    fun getPokemonByGeneration(generation: String) { pokedexRepository.getPokemonByGeneration(generation) }
 
-
-    fun getPokemonById(pokemonId: Int) {
-        pokedexRepository.getPokemon(pokemonId)
-    }
-
-    fun getPokemonByGeneration(generation: String) {
-        pokedexRepository.getPokemonByGeneration(generation)
-    }
+    fun getPokemonByType(type: String) { pokedexRepository.getPokemonByType(type) }
 
     fun searchPokemonByName(searchText:String){
         viewModelScope.launch {

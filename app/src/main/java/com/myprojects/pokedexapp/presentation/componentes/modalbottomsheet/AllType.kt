@@ -1,5 +1,6 @@
 package com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,22 +13,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.foundation.Image
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.res.imageResource
-import com.myprojects.pokedexapp.R
+import coil.ImageLoader
+import coil.compose.rememberAsyncImagePainter
+import coil.decode.SvgDecoder
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 
 @Composable
-fun AllGen(closeSheet : () -> Unit, generation: List<Generation>,homeViewModel: HomeViewModel) {
+fun AllType(closeSheet : () -> Unit, types: List<Type>,homeViewModel: HomeViewModel) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(574.dp)
+            .height(440.dp)
             .background(Color.White)
     ) {
         LazyVerticalGrid(
@@ -40,7 +42,7 @@ fun AllGen(closeSheet : () -> Unit, generation: List<Generation>,homeViewModel: 
         ) {
             header {
                 Text(
-                    text = "Generation",
+                    text = "Types",
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h5.copy(
                         fontWeight =
@@ -49,46 +51,46 @@ fun AllGen(closeSheet : () -> Unit, generation: List<Generation>,homeViewModel: 
                     modifier = Modifier.padding(bottom = 10.dp)
                 )
             }
-            items(generation.size){
+            items(types.size){
                     index ->
-                val gen = generation[index]
-                cardGeneration(generation = gen, homeViewModel = homeViewModel)
+                val type = types[index]
+                cardType(type = type, homeViewModel = homeViewModel)
             }
         }
     }
 }
 
 @Composable
-private fun cardGeneration(generation: Generation,homeViewModel: HomeViewModel){
+private fun cardType(type: Type,homeViewModel: HomeViewModel){
+    val imageLoader = ImageLoader.Builder(LocalContext.current)
+        .components {
+            add(SvgDecoder.Factory())
+        }
+        .build()
+
     Card(
         modifier = Modifier
-            .height(116.dp)
+            .height(120.dp)
             .clickable {
-                homeViewModel.getPokemonByGeneration(generation.number)
+                homeViewModel.getPokemonByType(type.type)
             },
         shape = RoundedCornerShape(20.dp),
-        backgroundColor = Color.White,
+        backgroundColor = type.color,
         elevation = 10.dp
     ){
         Box( modifier = Modifier.padding(start = 16.dp, end = 4.dp)
         ) {
             Column(modifier = Modifier
-                .align(Alignment.Center)
+                .align(Alignment.Center),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
-                Text(text = generation.label,
-                    color = Color.Black,
-                    fontSize = 16.sp, modifier = Modifier.padding(vertical = 5.dp))
-                Spacer(modifier = Modifier.height(8.dp))
-                Image(
-                    ImageBitmap.imageResource(id = generation.icon), contentDescription = "",
-                    modifier = Modifier.size(100.dp)  )
+               Image(
+                   painter = rememberAsyncImagePainter(type.icon, imageLoader),
+                   colorFilter = ColorFilter.tint(Color.White),
+                   contentDescription = "", modifier = Modifier.size(80.dp)  )
             }
         }
     }
 }
 
-fun LazyGridScope.header(
-    content: @Composable LazyGridItemScope.() -> Unit
-) {
-    item(span = { GridItemSpan(this.maxLineSpan) }, content = content)
-}

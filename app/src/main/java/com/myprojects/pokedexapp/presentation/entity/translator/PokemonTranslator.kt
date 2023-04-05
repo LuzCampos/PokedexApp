@@ -36,6 +36,21 @@ class PokemonTranslator {
             "fire" -> 0xFFFB6C6C
             "water" -> 0xFF77BDFE
             "electric" -> 0xFFFFCE4B
+            "poison" -> 0xFF7C538C
+            "rock" -> 0xFFB1736C
+            "fairy" -> 0xfff06292
+            "rock"-> 0xFFB1736C
+            "poison"-> 0xFF7C538C
+            "dragon" -> 0xff9c27b0
+            "ghost"-> 0xff482880
+            "steel"-> 0xff9e9e9e
+            "normal" -> 0xff8d6e63
+            "ground" -> 0xffffa733
+            "psychic" -> 0xffec407a
+            "ice" -> 0xff00c6e0
+            "flying" -> 0xffaf52bf
+            "fighting" -> 0xff550000
+            "dark" -> 0xff212121
             else -> 0xFFFFCE4B
         }
     }
