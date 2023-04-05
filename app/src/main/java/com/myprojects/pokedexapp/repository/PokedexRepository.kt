@@ -15,42 +15,26 @@ class PokedexRepository (private val pokedexDao: PokedexDao) {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     fun getAllPokemons(){
-        coroutineScope.launch {
-            pokemones.postValue(pokedexDao.obtenerPokemons())
-        }
+        coroutineScope.launch {pokemones.postValue(pokedexDao.obtenerPokemons())}
     }
 
-   /* suspend fun getAllPokemons(): PokedexScreenState {
-        //coroutineScope.launch {
-            return try {
-                val items = pokedexDao.obtenerPokemons()
-                if (items.isNotEmpty()) {
-                    PokedexScreenState.Success(items)
-                } else {
-                    PokedexScreenState.Loading
-                }
-            } catch (e: Exception) {
-                PokedexScreenState.Error("Failed to fetch items: ${e.message}")
-            }
-           // pokemones.postValue(pokedexDao.obtenerPokemons())
-        //}
-    }*/
-
     fun getPokemon(pokemonId: Int){
-        coroutineScope.launch(Dispatchers.IO) {
-            getpokemon.postValue(pokedexDao.getPokemonById(pokemonId))
-        }
+      coroutineScope.launch(Dispatchers.IO) { getpokemon.postValue(pokedexDao.getPokemonById(pokemonId))}
     }
 
     fun searchPokemonByName(searchText: String) {
-        coroutineScope.launch(Dispatchers.IO) {
-            pokemones.postValue(pokedexDao.searchPokemonsByName("%$searchText%"))
-        }
+      coroutineScope.launch(Dispatchers.IO) { pokemones.postValue(pokedexDao.searchPokemonsByName("%$searchText%")) }
     }
 
     fun getPokemonByGeneration(generation: String) {
+      coroutineScope.launch(Dispatchers.IO) {
+          pokemones.postValue(pokedexDao.getPokemonByGeneration(generation))
+        }
+    }
+
+    fun getPokemonByType(type: String) {
         coroutineScope.launch(Dispatchers.IO) {
-            pokemones.postValue(pokedexDao.getPokemonByGeneration(generation))
+            pokemones.postValue(pokedexDao.getPokemonByType(type))
         }
     }
 }

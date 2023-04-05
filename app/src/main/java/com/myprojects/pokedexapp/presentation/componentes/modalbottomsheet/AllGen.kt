@@ -17,6 +17,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.res.imageResource
+import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 
 @Composable
@@ -76,7 +79,8 @@ private fun cardGeneration(generation: Generation,homeViewModel: HomeViewModel){
                     color = Color.Black,
                     fontSize = 16.sp, modifier = Modifier.padding(vertical = 5.dp))
                 Spacer(modifier = Modifier.height(8.dp))
-                Image(generation.icon, contentDescription = "",
+                Image(
+                    ImageBitmap.imageResource(id = generation.icon), contentDescription = "",
                     modifier = Modifier.size(100.dp)  )
             }
         }
