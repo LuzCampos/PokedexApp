@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.data.PokemonEntity
+import com.myprojects.pokedexapp.presentation.componentes.PokeballImage
 import com.myprojects.pokedexapp.presentation.componentes.floatingbutton.MultiFloatingButton
 import com.myprojects.pokedexapp.presentation.componentes.PokedexGrid
 import com.myprojects.pokedexapp.presentation.componentes.floatingbutton.FabItem
@@ -96,56 +98,86 @@ fun HomeScreen( navController: NavController, homeViewModel: HomeViewModel){
             }
         }
     ){
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = {
-                        LazyRow() {
-                            items(items = generations){
-                                    gen -> Button(onClick = { homeViewModel.getPokemonByGeneration(gen.number) }) {
-                                Text(text = gen.number)
-                            }
+        Box (modifier = Modifier.fillMaxWidth())
+        {
+            PokeBallBackground()
+            Scaffold(
+                modifier = Modifier.align(Alignment.TopCenter).padding(horizontal = 8.dp),
+                backgroundColor = Color.Transparent,
+                topBar = {
+                    TopAppBar(
+                        backgroundColor = Color.Transparent,
+                        elevation = 0.dp,
+                        modifier = Modifier.padding(top = 30.dp),
+                        title = {
+                            /* LazyRow() {
+                                 items(items = generations){
+                                         gen -> Button(onClick = { homeViewModel.getPokemonByGeneration(gen.number) }) {
+                                     Text(text = gen.number)
+                                 }
+                                 }
+                             }*/
+                        },
+                        navigationIcon = {
+                            IconButton(onClick = {
+                                homeViewModel.getPokemons()
+                            }) {
+                                Icon(
+                                    Icons.Filled.ArrowBack,
+                                    tint = Color(0xff303943),
+                                    contentDescription = "backIcon"
+                                )
                             }
                         }
-                        //Spacer(modifier = Modifier.fillMaxSize())
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            homeViewModel.getPokemons()
-                        }) {
-                            Icon(
-                                Icons.Filled.ArrowBack, tint = Color.Black, contentDescription = "backIcon"
-                            )
-                        }
-                    }
-                )
-            },
-            floatingActionButton =
-            {
-                MultiFloatingButton(
-                    multiFloatingState = multiFloatingState,
-                    onMultiFabStateChange = {
-                        multiFloatingState = it
-                    },
-                    items = items,
-                    context = context,
-                    onClick1 = {
-                        currentBottomSheet = BottomSheetType.TYPE1
-                        openSheet()
-                    },
-                    onClick2 = {
-                        currentBottomSheet = BottomSheetType.TYPE2
-                        openSheet()
-                    },
-                    onClick3 = {
-                        currentBottomSheet = BottomSheetType.TYPE3
-                        openSheet()
-                    },
-                )
-            },
-            content = {
-               PokedexGrid(pokemonesLista = pokemonesLista, modifier = Modifier.padding(it), navController = navController)
-            }
+                    )
+                },
+                floatingActionButton =
+                {
+                    MultiFloatingButton(
+                        multiFloatingState = multiFloatingState,
+                        onMultiFabStateChange = {
+                            multiFloatingState = it
+                        },
+                        items = items,
+                        context = context,
+                        onClick1 = {
+                            currentBottomSheet = BottomSheetType.TYPE1
+                            openSheet()
+                        },
+                        onClick2 = {
+                            currentBottomSheet = BottomSheetType.TYPE2
+                            openSheet()
+                        },
+                        onClick3 = {
+                            currentBottomSheet = BottomSheetType.TYPE3
+                            openSheet()
+                        },
+                    )
+                },
+                content = {
+                    PokedexGrid(
+                        pokemonesLista = pokemonesLista,
+                        modifier = Modifier.padding(it),
+                        navController = navController
+                    )
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun BoxScope.PokeBallBackground(){
+    Box(
+        modifier = Modifier
+            .align(Alignment.TopEnd)
+           .offset(x = 90.dp, y = (-60).dp),
+    ) {
+        Image(
+            modifier = Modifier.size(274.dp).align(Alignment.TopEnd),
+            painter = painterResource(R.drawable.pokeballbackground),
+            contentDescription = "Pokeball Shadow",
+            colorFilter = ColorFilter.tint(color = Color(0xff303943).copy(0.06f))
         )
     }
 }

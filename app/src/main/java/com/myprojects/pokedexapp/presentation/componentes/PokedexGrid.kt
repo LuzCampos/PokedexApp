@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -34,7 +35,9 @@ fun PokedexGrid(pokemonesLista: List<PokemonEntity>, modifier : Modifier,navCont
             header {
                 Text(
                     text = "Pokedex",
-                    style = MaterialTheme.typography.h5.copy(
+                    color = Color(0xff303943),
+                    modifier = Modifier.padding(bottom = 40.dp),
+                    style = MaterialTheme.typography.h4.copy(
                         fontWeight =
                         FontWeight.ExtraBold
                     )
