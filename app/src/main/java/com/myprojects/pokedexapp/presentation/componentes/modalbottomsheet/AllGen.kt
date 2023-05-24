@@ -19,11 +19,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
-import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 
 @Composable
-fun AllGen(closeSheet : () -> Unit, generation: List<Generation>,homeViewModel: HomeViewModel) {
+fun AllGen(generation: List<Generation>,homeViewModel: HomeViewModel) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -52,14 +51,14 @@ fun AllGen(closeSheet : () -> Unit, generation: List<Generation>,homeViewModel: 
             items(generation.size){
                     index ->
                 val gen = generation[index]
-                cardGeneration(generation = gen, homeViewModel = homeViewModel)
+                CardGeneration(generation = gen, homeViewModel = homeViewModel)
             }
         }
     }
 }
 
 @Composable
-private fun cardGeneration(generation: Generation,homeViewModel: HomeViewModel){
+private fun CardGeneration(generation: Generation,homeViewModel: HomeViewModel){
     Card(
         modifier = Modifier
             .height(116.dp)

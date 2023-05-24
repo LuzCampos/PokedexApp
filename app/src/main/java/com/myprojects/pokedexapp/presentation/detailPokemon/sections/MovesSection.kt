@@ -1,12 +1,9 @@
 package com.myprojects.pokedexapp.presentation.detailPokemon.sections
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,43 +15,40 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.presentation.entity.PokemonUi
+import java.util.*
 
 @Composable
 fun MovesSection(pokemonui: PokemonUi) {
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(horizontal = 10.dp, vertical = 10.dp)) {
-        title("Abilities")
-        abilitiesRow(pokemonui = pokemonui)
+        Title("Abilities")
+        AbilitiesRow(pokemonui = pokemonui)
         Box(modifier = Modifier.height(10.dp))
-        title("Hidden Abilities")
-        abilitiesHidden(pokemonui = pokemonui)
+        Title("Hidden Abilities")
+        AbilitiesHidden(pokemonui = pokemonui)
     }
 }
 
 @Composable
-fun title(title:String){
+fun Title(title:String){
     Text(
-        text = "$title",
+        text = title,
         fontWeight = FontWeight.ExtraBold,
         //fontFamily = FontFamily(Font(R.font.circularstdblack)),
     )
 }
 
 @Composable
-fun abilitiesRow(pokemonui: PokemonUi){
+fun AbilitiesRow(pokemonui: PokemonUi){
     Row(modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically) {
-        Text(text = "${pokemonui.abilities_0}", color = Color(0xFF8C9092),)
+        Text(text = pokemonui.abilities_0, color = Color(0xFF8C9092))
         //Text(text = "${pokemonui.primary_type}".toUpperCase())
         Box(
             modifier = Modifier
@@ -74,7 +68,7 @@ fun abilitiesRow(pokemonui: PokemonUi){
 }
 
 @Composable
-fun abilitiesHidden(pokemonui: PokemonUi){
+fun AbilitiesHidden(pokemonui: PokemonUi){
     Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -82,17 +76,17 @@ fun abilitiesHidden(pokemonui: PokemonUi){
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                abilitie(pokemonui = pokemonui, "${pokemonui.abilities_hidden}")
+                Abilitie(pokemonui = pokemonui, pokemonui.abilities_hidden)
                 if(pokemonui.abilities_1.isNotEmpty()){
-                    abilitie(pokemonui = pokemonui, abilitie = "${pokemonui.abilities_1}" ?: "" )
+                    Abilitie(pokemonui = pokemonui, abilitie = pokemonui.abilities_1)
                 }
                 //Text(text = "${pokemonui.primary_type}".toUpperCase())
             }
 }
 
 @Composable
-fun abilitie(pokemonui: PokemonUi, abilitie:String){
-    Text(text = abilitie.toUpperCase(), color = Color.White,
+fun Abilitie(pokemonui: PokemonUi, abilitie:String){
+    Text(text = abilitie.uppercase(Locale.ROOT), color = Color.White,
         fontWeight = FontWeight.ExtraBold,
         fontSize = 12.sp,
         modifier = Modifier

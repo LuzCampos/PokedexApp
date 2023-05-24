@@ -1,13 +1,11 @@
 package com.myprojects.pokedexapp.repository
 
 import androidx.lifecycle.MutableLiveData
-import com.myprojects.pokedexapp.PokedexScreenState
 import com.myprojects.pokedexapp.data.PokemonEntity
 import com.myprojects.pokedexapp.data.room.PokedexDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class PokedexRepository (private val pokedexDao: PokedexDao) {
     val pokemones = MutableLiveData<List<PokemonEntity>>()

@@ -85,17 +85,6 @@ class PokemonTranslator {
 }
 
 
-
-fun getDrawableResourceFromName(name:String, number: Int):String{
-    return when (number){
-        getDrawableResourceFromNumber(number) -> name
-        else -> {
-            //android.R.drawable.screen_background_light_transparent
-            "null"
-        }
-    }
-}
-
 fun getDrawableResourceFromNumber(number: Int): Int {
     return when (number) {
         1 -> R.drawable.pokemon_001

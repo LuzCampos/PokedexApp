@@ -11,7 +11,6 @@ import androidx.compose.material.*
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -50,11 +49,11 @@ fun PokemonDetail(
     }
     homeViewModel.getPokemonById(national_number!!.toInt())
     val selectedPokemon = homeViewModel.pokemon.observeAsState().value
-    if (selectedPokemon != null) contenido(selectedPokemon, pokemonTranslator = pokemonTranslator, navController)
+    if (selectedPokemon != null) Contenido(selectedPokemon, pokemonTranslator = pokemonTranslator, navController)
 }
 
 @Composable
-fun contenido(pokemon : PokemonEntity, pokemonTranslator: PokemonTranslator ,navController: NavController){
+fun Contenido(pokemon : PokemonEntity, pokemonTranslator: PokemonTranslator ,navController: NavController){
     val pokemonUi = pokemonTranslator.domainToUi(pokemon)
     Surface(color = Color(pokemonUi.backgroundColorValue)) {
         Box(modifier = Modifier.fillMaxWidth()) {
@@ -95,11 +94,6 @@ fun BoxScope.TopHeaders(pokemonui: PokemonUi, navController: NavController){
     }
 }
 
-@Composable
-fun titulo(name : String){
-    Text(text = "$name")
-}
-
 private enum class Sections(val title: String) {
     About("About"),
     BaseStats("Base Stats"),
@@ -128,7 +122,7 @@ private fun BoxScope.HeaderRight(pokemonui: PokemonUi) {
         Spacer(modifier = Modifier.height(6.dp))
         Text(
             modifier = Modifier.align(Alignment.End),
-            text = pokemonui.classification ?: "",
+            text = pokemonui.classification,
             style = TextStyle(
                 fontSize = 12.sp,
                 color = Color.White
@@ -156,12 +150,10 @@ private fun BoxScope.HeaderLeft(pokemonui: PokemonUi) {
             )
         )
         Spacer(modifier = Modifier.height(6.dp))
-        Row() {
-           PowerChip(text = pokemonui.primary_type ?: "",)
+        Row {
+           PowerChip(text = pokemonui.primary_type)
            Spacer(modifier = Modifier.width(6.dp))
-            if (pokemonui.secondary_type.isNotEmpty()){
-                PowerChip(text = pokemonui.secondary_type ?: "")
-            }
+            if (pokemonui.secondary_type.isNotEmpty()) PowerChip(text = pokemonui.secondary_type)
         }
     }
 }

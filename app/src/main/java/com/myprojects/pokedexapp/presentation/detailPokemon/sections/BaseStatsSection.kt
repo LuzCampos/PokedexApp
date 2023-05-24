@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.myprojects.pokedexapp.presentation.entity.PokemonUi
 
@@ -59,7 +58,7 @@ fun TableScreen(stats: List<Stat>) {
                     weight = column2Weight,
                     Color(0xff303943)
                 )
-                linearBase(progress = it.progress, weight = column3Weight)
+                LinearBase(progress = it.progress, weight = column3Weight)
             }
         }
     }
@@ -82,7 +81,7 @@ fun RowScope.TableCell1(
 
 
 @Composable
-fun RowScope.linearBase(progress: Float,weight: Float){
+fun RowScope.LinearBase(progress: Float,weight: Float){
 
    val color = if(progress < 0.51f)
    {

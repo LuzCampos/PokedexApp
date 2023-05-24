@@ -32,12 +32,12 @@ class PokemonUi (
         "#${national_number.toString().padStart(length = 3, padChar = '0')}"
 
     fun getLibsFormatted(): String {
-        var result: Double = weight_kg * 2.20462
+        val result: Double = weight_kg * 2.20462
         return "${result.toString().take(4)} lbs (${weight_kg.toString()} kg)"
     }
 
     fun getHeightFormatted(): String {
-        var result: Double = (height_m*100) / 30.48
+        val result: Double = (height_m*100) / 30.48
         return "${result.toString().take(4)}” (${height_m.toString().padEnd(4,padChar='0')} m)"
     }
 }

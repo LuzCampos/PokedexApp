@@ -18,14 +18,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 
 @Composable
-fun AllType(closeSheet : () -> Unit, types: List<Type>,homeViewModel: HomeViewModel) {
+fun AllType(types: List<Type>,homeViewModel: HomeViewModel) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -54,14 +53,14 @@ fun AllType(closeSheet : () -> Unit, types: List<Type>,homeViewModel: HomeViewMo
             items(types.size){
                     index ->
                 val type = types[index]
-                cardType(type = type, homeViewModel = homeViewModel)
+                CardType(type = type, homeViewModel = homeViewModel)
             }
         }
     }
 }
 
 @Composable
-private fun cardType(type: Type,homeViewModel: HomeViewModel){
+private fun CardType(type: Type,homeViewModel: HomeViewModel){
     val imageLoader = ImageLoader.Builder(LocalContext.current)
         .components {
             add(SvgDecoder.Factory())

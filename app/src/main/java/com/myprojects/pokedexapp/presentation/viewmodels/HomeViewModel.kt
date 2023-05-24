@@ -8,9 +8,6 @@ import com.myprojects.pokedexapp.PokedexScreenState
 import com.myprojects.pokedexapp.data.PokemonEntity
 import com.myprojects.pokedexapp.repository.PokedexRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

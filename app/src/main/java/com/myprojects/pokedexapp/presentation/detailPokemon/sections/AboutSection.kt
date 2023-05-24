@@ -24,32 +24,32 @@ fun AboutSection(pokemonui: PokemonUi) {
         //contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ){
-        description(pokemonui.description)
-        dimensionesPokemon(pokemonui)
-        breeding(pokemonui,
+        Description(pokemonui.description)
+        DimensionesPokemon(pokemonui)
+        Breeding(pokemonui,
             Modifier
                 .fillMaxWidth()
                 )
     }
 }
 @Composable
-fun breeding(pokemonui: PokemonUi, modifier: Modifier) {
+fun Breeding(pokemonui: PokemonUi, modifier: Modifier) {
     Column(verticalArrangement = Arrangement.SpaceBetween, modifier = modifier
         ) {
         Text(modifier= Modifier.padding(vertical = 6.dp),text = "Breeding", fontWeight = FontWeight.ExtraBold)
-        breedingRow(breedingText = "Gender", pokemonui = pokemonui)
-        breedingRow(breedingText = "Egg cycle", pokemonui = pokemonui)
+        BreedingRow(breedingText = "Gender", pokemonui = pokemonui)
+        BreedingRow(breedingText = "Egg cycle", pokemonui = pokemonui)
     }
 }
 
 @Composable
-fun breedingRow(breedingText:String, pokemonui: PokemonUi){
+fun BreedingRow(breedingText:String, pokemonui: PokemonUi){
     Row( modifier = Modifier.padding(vertical = 10.dp),
         horizontalArrangement = Arrangement.SpaceEvenly) {
-        breedingTitle(texto = breedingText)
+        BreedingTitle(texto = breedingText)
         if(breedingText == "Gender"){
-            genderTextValue(gender = "${pokemonui.percent_male}", icono = R.drawable.gendermale)
-            genderTextValue(gender = "${pokemonui.percent_female}", icono = R.drawable.genderfemale)
+            GenderTextValue(gender = "${pokemonui.percent_male}", icono = R.drawable.gendermale)
+            GenderTextValue(gender = "${pokemonui.percent_female}", icono = R.drawable.genderfemale)
         } else {
             Text(text = pokemonui.primary_type.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(
@@ -61,7 +61,7 @@ fun breedingRow(breedingText:String, pokemonui: PokemonUi){
 }
 
 @Composable
-fun genderTextValue(gender:String, icono:Int) {
+fun GenderTextValue(gender:String, icono:Int) {
     Row(modifier = Modifier.padding(end = 14.dp) ,verticalAlignment = Alignment.CenterVertically) {
         Image(
             ImageBitmap.imageResource(icono),
@@ -73,7 +73,7 @@ fun genderTextValue(gender:String, icono:Int) {
 }
 
 @Composable
-fun breedingTitle(texto:String){
+fun BreedingTitle(texto:String){
     Text(
         text = texto,
         color = Color(0xFF8C9092),
@@ -81,7 +81,7 @@ fun breedingTitle(texto:String){
 }
 
 @Composable
-fun dimensionesPokemon(pokemonui: PokemonUi){
+fun DimensionesPokemon(pokemonui: PokemonUi){
     Card(
       //  elevation = 10.dp,
         modifier = Modifier
@@ -91,14 +91,14 @@ fun dimensionesPokemon(pokemonui: PokemonUi){
     ) {
         Row(horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.padding(horizontal = 24.dp, vertical = 10.dp)) {
-            dimension(title = "Height", dimension = pokemonui.getHeightFormatted())
-            dimension(title = "Weight", dimension = pokemonui.getLibsFormatted())
+            Dimension(title = "Height", dimension = pokemonui.getHeightFormatted())
+            Dimension(title = "Weight", dimension = pokemonui.getLibsFormatted())
         }
     }
 }
 
 @Composable
-fun dimension(title:String, dimension:String){
+fun Dimension(title:String, dimension:String){
     Column(
         modifier = Modifier.padding(vertical = 4.dp),
         verticalArrangement = Arrangement.spacedBy(6.dp),
@@ -110,9 +110,9 @@ fun dimension(title:String, dimension:String){
 }
 
 @Composable
-fun description(desc: String) {
+fun Description(desc: String) {
    Text(
-       text = "$desc",
+       text = desc,
        color = Color(0xff303943)
    )
 }

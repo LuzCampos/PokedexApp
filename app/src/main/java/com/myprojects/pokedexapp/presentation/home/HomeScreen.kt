@@ -1,10 +1,7 @@
 package com.myprojects.pokedexapp.presentation.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -12,35 +9,24 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.data.PokemonEntity
-import com.myprojects.pokedexapp.presentation.componentes.PokeballImage
 import com.myprojects.pokedexapp.presentation.componentes.floatingbutton.MultiFloatingButton
 import com.myprojects.pokedexapp.presentation.componentes.PokedexGrid
-import com.myprojects.pokedexapp.presentation.componentes.floatingbutton.FabItem
 import com.myprojects.pokedexapp.presentation.componentes.floatingbutton.MultiFloatingState
 import com.myprojects.pokedexapp.presentation.componentes.floatingbutton.items
 import com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet.*
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -89,7 +75,6 @@ fun HomeScreen( navController: NavController, homeViewModel: HomeViewModel){
             currentBottomSheet?.let {
                 SheetLayout(
                     bottomSheetType = it,
-                    closeSheet = {closeSheet()},
                     searchText = searchText,
                     homeViewModel = homeViewModel,
                     generation = generations,
