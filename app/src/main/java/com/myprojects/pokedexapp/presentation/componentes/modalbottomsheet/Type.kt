@@ -28,5 +28,6 @@ val types = listOf(
     Type(icon = R.drawable.normal, label = "Normal" , type = "normal", color = Color(0xff8d6e63)),
     Type(icon = R.drawable.psychic, label = "Fairy" , type = "psychic", color = Color(0xffec407a)),
     Type(icon = R.drawable.steel, label = "Steel" , type = "steel", color = Color(0xff9e9e9e)),
-    Type(icon = R.drawable.ground, label = "ground" , type = "ground", color = Color(0xffffa733))
+    Type(icon = R.drawable.ground, label = "ground" , type = "ground", color = Color(0xffffa733)),
+    Type(icon = R.drawable.bug, label = "bug" , type = "bug", color = Color(0xffA6B91A))
 )

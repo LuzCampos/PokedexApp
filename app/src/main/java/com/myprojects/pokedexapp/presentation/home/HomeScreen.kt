@@ -110,13 +110,7 @@ fun HomeScreen( navController: NavController, homeViewModel: HomeViewModel){
                         elevation = 0.dp,
                         modifier = Modifier.padding(top = 30.dp),
                         title = {
-                            /* LazyRow() {
-                                 items(items = generations){
-                                         gen -> Button(onClick = { homeViewModel.getPokemonByGeneration(gen.number) }) {
-                                     Text(text = gen.number)
-                                 }
-                                 }
-                             }*/
+
                         },
                         navigationIcon = {
                             IconButton(onClick = {

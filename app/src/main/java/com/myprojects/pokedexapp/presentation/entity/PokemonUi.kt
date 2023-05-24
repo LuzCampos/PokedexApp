@@ -6,7 +6,11 @@ class PokemonUi (
     val national_number: Int,
     val english_name: String,
     val classification:String,
+    val abilities_0:String,
+    val abilities_1:String,
+    val abilities_hidden:String,
     val description:String,
+    val evochain_2:String,
     val height_m:Double,
     val weight_kg:Double,
     val percent_male:Double,
@@ -20,6 +24,8 @@ class PokemonUi (
     val primary_type:String,
     val secondary_type:String,
     @DrawableRes val pokemonDrawableResourceId: Int,
+    @DrawableRes val pokemonTypeResourceId: Int,
+    //@DrawableRes val pokemonDrawableEvolution: Int,
     val backgroundColorValue: Long,
 ) {
     fun getNumberFormatted(): String =

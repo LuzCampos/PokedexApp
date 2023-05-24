@@ -10,6 +10,9 @@ class PokemonTranslator {
             national_number = pokemon.national_number,
             english_name = pokemon.english_name,
             primary_type = pokemon.primary_type,
+            abilities_0 = pokemon.abilities_0,
+            abilities_1 = pokemon.abilities_1,
+            abilities_hidden = pokemon.abilities_hidden,
             height_m = pokemon.height_m,
             weight_kg = pokemon.weight_kg,
             percent_male = pokemon.percent_male,
@@ -23,10 +26,12 @@ class PokemonTranslator {
             classification = pokemon.classification,
             description = pokemon.description,
             secondary_type = pokemon.secondary_type,
+            evochain_2 = pokemon.evochain_2,
             //pokemonDrawableResourceId = obtainDrawableResourceIdFromPokemon(pokemon),
             pokemonDrawableResourceId = getDrawableResourceFromNumber(pokemon.national_number),
             backgroundColorValue = obtainBackgroundColorFromPokemon(pokemon),
-            //listaTypes = listOf(pokemon.primary_type,pokemon.secondary_type)
+            pokemonTypeResourceId = obtainIconType(pokemon)
+            //pokemonDrawableEvolution = getDrawableResourceFromName(pokemon.evochain_2,pokemon.national_number)
         )
     }
 
@@ -49,7 +54,44 @@ class PokemonTranslator {
             "flying" -> 0xffaf52bf
             "fighting" -> 0xff550000
             "dark" -> 0xff212121
+            "bug" -> 0xffA6B91A
             else -> 0xFFFFCE4B
+        }
+    }
+
+    private fun obtainIconType(pokemon: PokemonEntity): Int {
+        return when (pokemon.primary_type) {
+            "grass" -> R.drawable.grass
+            "fire" -> R.drawable.fire
+            "bug" -> R.drawable.bug
+            "water" -> R.drawable.water
+            "poison" -> R.drawable.poison
+            "rock" -> R.drawable.rock
+            "fairy" -> R.drawable.fairy
+            "dragon" -> R.drawable.dragon
+            "ghost" -> R.drawable.ghost
+            "steel" -> R.drawable.steel
+            "normal" -> R.drawable.normal
+            "ground" -> R.drawable.ground
+            "psychic" -> R.drawable.psychic
+            "ice" -> R.drawable.ice
+            "flying" -> R.drawable.flying
+            "fighting" -> R.drawable.fighting
+            "dark" -> R.drawable.dark
+            "electric" -> R.drawable.electric
+            else -> R.drawable.pokeballicon
+        }
+    }
+}
+
+
+
+fun getDrawableResourceFromName(name:String, number: Int):String{
+    return when (number){
+        getDrawableResourceFromNumber(number) -> name
+        else -> {
+            //android.R.drawable.screen_background_light_transparent
+            "null"
         }
     }
 }

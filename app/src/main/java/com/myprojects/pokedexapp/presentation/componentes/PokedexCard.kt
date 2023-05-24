@@ -32,10 +32,10 @@ fun PokemonCard(pokemonUi: PokemonUi, onClickCard: () -> Unit) {
         Box(modifier = Modifier
             .clickable { onClickCard() }
             .fillMaxWidth()
-            .aspectRatio(1.4f)
+            .aspectRatio(1.36f)
         ) {
             PokeballImage(Modifier.align(Alignment.BottomEnd))
-            PokemonImage(pokemonUi.pokemonDrawableResourceId, Modifier.align(Alignment.BottomEnd))
+            PokemonImage(pokemonUi.pokemonDrawableResourceId, Modifier.align(Alignment.BottomEnd).padding(end = 10.dp, bottom = 10.dp))
             Text(
                 text = pokemonUi.getNumberFormatted(),
                 color = Color.Black.copy(.2f),
@@ -46,8 +46,8 @@ fun PokemonCard(pokemonUi: PokemonUi, onClickCard: () -> Unit) {
             )
             Column(
                 modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .padding(start = 24.dp, top = 24.dp)
+                 //   .align(Alignment.Cen)
+                    .padding(start = 18.dp, top = 24.dp)
             ) {
                 Text(
                     pokemonUi.english_name,
@@ -60,10 +60,6 @@ fun PokemonCard(pokemonUi: PokemonUi, onClickCard: () -> Unit) {
                 if (pokemonUi.secondary_type.isNotEmpty()) {
                     PowerChip(text = pokemonUi.secondary_type)
                 }
-                //pokemonUi.pokemonTypes.map { pokemonType ->
-                //  PowerChip(pokemonType.javaClass.simpleName)
-                // Spacer(modifier = Modifier.padding(2.dp))
-                //}
             }
         }
     }
@@ -81,7 +77,7 @@ fun PowerChip(text: String, modifier: Modifier = Modifier) {
         style = MaterialTheme.typography.overline,
         modifier = modifier
             .background(
-                color = Color.White.copy(alpha = .15f), shape = RoundedCornerShape(8.dp)
+                color = Color.White.copy(alpha = .15f), shape = RoundedCornerShape(20.dp)
             )
             .padding(horizontal = 12.dp, vertical = 4.dp),
     )
