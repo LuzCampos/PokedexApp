@@ -54,7 +54,7 @@ fun PokedexGrid(pokemonesLista: List<PokemonEntity>, modifier : Modifier,navCont
                 PokemonCard(
                     pokemonUi = pokemonUi,
                     onClickCard = {
-                        navController.navigate("detail/${pokemonUi.national_number}")
+                        navController.navigate("detail?national_number=${pokemonUi.national_number}&evochain_0=${pokemonUi.evochain_0}&evochain_2=${pokemonUi.evochain_2}&evochain_4=${pokemonUi.evochain_4}")
                     }
                 )
             }

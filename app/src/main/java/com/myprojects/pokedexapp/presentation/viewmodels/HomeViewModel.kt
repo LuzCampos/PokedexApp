@@ -15,7 +15,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val pokedexRepository: PokedexRepository) : ViewModel() {
 
     val pokemonesLista : LiveData<List<PokemonEntity>> = pokedexRepository.pokemones
-    val pokemon : LiveData<PokemonEntity> = pokedexRepository.getpokemon
 
     private val _uiState = MutableLiveData<PokedexScreenState>()
     val uiState: LiveData<PokedexScreenState> = _uiState
@@ -23,8 +22,6 @@ class HomeViewModel @Inject constructor(private val pokedexRepository: PokedexRe
     init { getPokemons() }
 
     fun getPokemons(){ pokedexRepository.getAllPokemons() }
-
-    fun getPokemonById(pokemonId: Int) { pokedexRepository.getPokemon(pokemonId) }
 
     fun getPokemonByGeneration(generation: String) { pokedexRepository.getPokemonByGeneration(generation) }
 

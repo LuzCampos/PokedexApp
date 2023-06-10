@@ -25,11 +25,15 @@ import java.util.*
 fun MovesSection(pokemonui: PokemonUi) {
     Column(modifier = Modifier
         .fillMaxSize()
-        .padding(horizontal = 10.dp, vertical = 10.dp)) {
+        .padding(horizontal = 10.dp, vertical = 10.dp),
+        //verticalArrangement = Arrangement.Center,
+        // horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Title("Abilities")
         AbilitiesRow(pokemonui = pokemonui)
         Box(modifier = Modifier.height(10.dp))
-        Title("Hidden Abilities")
+        if (pokemonui.abilities_hidden.isNotBlank() || pokemonui.abilities_hidden.isNotBlank())
+            Title(title = "Hidden Abilities")
         AbilitiesHidden(pokemonui = pokemonui)
     }
 }
@@ -70,18 +74,16 @@ fun AbilitiesRow(pokemonui: PokemonUi){
 @Composable
 fun AbilitiesHidden(pokemonui: PokemonUi){
     Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 14.dp),
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Abilitie(pokemonui = pokemonui, pokemonui.abilities_hidden)
-                if(pokemonui.abilities_1.isNotEmpty()){
-                    Abilitie(pokemonui = pokemonui, abilitie = pokemonui.abilities_1)
-                }
-                //Text(text = "${pokemonui.primary_type}".toUpperCase())
-            }
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 14.dp),
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        if(pokemonui.abilities_hidden.isNotBlank())  Abilitie(pokemonui = pokemonui, pokemonui.abilities_hidden)
+        if(pokemonui.abilities_1.isNotBlank())   Abilitie(pokemonui = pokemonui, abilitie = pokemonui.abilities_1)
+        //Text(text = "${pokemonui.primary_type}".toUpperCase())
+    }
 }
 
 @Composable

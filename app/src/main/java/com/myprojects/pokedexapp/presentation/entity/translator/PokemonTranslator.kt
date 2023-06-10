@@ -5,6 +5,7 @@ import com.myprojects.pokedexapp.data.PokemonEntity
 import com.myprojects.pokedexapp.presentation.entity.PokemonUi
 
 class PokemonTranslator {
+
     fun domainToUi(pokemon: PokemonEntity): PokemonUi {
         return PokemonUi(
             national_number = pokemon.national_number,
@@ -26,8 +27,10 @@ class PokemonTranslator {
             classification = pokemon.classification,
             description = pokemon.description,
             secondary_type = pokemon.secondary_type,
+            evochain_0 = pokemon.evochain_0,
             evochain_2 = pokemon.evochain_2,
-            //pokemonDrawableResourceId = obtainDrawableResourceIdFromPokemon(pokemon),
+            evochain_4 = pokemon.evochain_4,
+           // pokemonEvolutionResource = getDrawableResourceFromName(pokemon.evochain_2),
             pokemonDrawableResourceId = getDrawableResourceFromNumber(pokemon.national_number),
             backgroundColorValue = obtainBackgroundColorFromPokemon(pokemon),
             pokemonTypeResourceId = obtainIconType(pokemon)
@@ -84,6 +87,7 @@ class PokemonTranslator {
     }
 }
 
+// fun getDrawableResourceFromName(name: String): Int {}
 
 fun getDrawableResourceFromNumber(number: Int): Int {
     return when (number) {

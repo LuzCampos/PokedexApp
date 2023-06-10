@@ -10,7 +10,9 @@ class PokemonUi (
     val abilities_1:String,
     val abilities_hidden:String,
     val description:String,
+    val evochain_0:String,
     val evochain_2:String,
+    val evochain_4:String,
     val height_m:Double,
     val weight_kg:Double,
     val percent_male:Double,
@@ -25,9 +27,11 @@ class PokemonUi (
     val secondary_type:String,
     @DrawableRes val pokemonDrawableResourceId: Int,
     @DrawableRes val pokemonTypeResourceId: Int,
-    //@DrawableRes val pokemonDrawableEvolution: Int,
+    //@DrawableRes val pokemonEvolutionResource: Int,
     val backgroundColorValue: Long,
 ) {
+
+
     fun getNumberFormatted(): String =
         "#${national_number.toString().padStart(length = 3, padChar = '0')}"
 

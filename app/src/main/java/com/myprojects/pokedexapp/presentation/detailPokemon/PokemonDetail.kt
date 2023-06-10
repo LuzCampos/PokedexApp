@@ -35,39 +35,53 @@ import com.myprojects.pokedexapp.presentation.detailPokemon.sections.EvolutionSe
 import com.myprojects.pokedexapp.presentation.detailPokemon.sections.MovesSection
 import com.myprojects.pokedexapp.presentation.entity.PokemonUi
 import com.myprojects.pokedexapp.presentation.entity.translator.PokemonTranslator
+import com.myprojects.pokedexapp.presentation.viewmodels.DetailViewModel
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 import java.util.*
 
 @Composable
 fun PokemonDetail(
     national_number: String?,
-    homeViewModel: HomeViewModel,
+    evochain_0: String?,
+    evochain_2: String?,
+    evochain_4: String?,
+    detailViewModel: DetailViewModel,
     navController: NavController
 ) {
     val pokemonTranslator = remember {
         PokemonTranslator()
     }
-    homeViewModel.getPokemonById(national_number!!.toInt())
-    val selectedPokemon = homeViewModel.pokemon.observeAsState().value
-    if (selectedPokemon != null) Contenido(selectedPokemon, pokemonTranslator = pokemonTranslator, navController)
+    detailViewModel.getPokemonById(national_number!!.toInt())
+    detailViewModel.getPokemonEvo0ByName(evochain_0!!.toString())
+    detailViewModel.getPokemonEvo2ByName(evochain_2!!.toString())
+    detailViewModel.getPokemonEvo4ByName(evochain_4!!.toString())
+    val selectedPokemon = detailViewModel.pokemon.observeAsState().value
+    val addEvo0Pokemon = detailViewModel.pokemonEvo0.observeAsState().value
+    val addEvo2Pokemon = detailViewModel.pokemonEvo2.observeAsState().value
+    val addEvo4Pokemon = detailViewModel.pokemonEvo4.observeAsState().value
+
+    if (selectedPokemon != null) Contenido(selectedPokemon, addEvo0Pokemon, addEvo2Pokemon, addEvo4Pokemon, pokemonTranslator = pokemonTranslator, navController)
 }
 
 @Composable
-fun Contenido(pokemon : PokemonEntity, pokemonTranslator: PokemonTranslator ,navController: NavController){
+fun Contenido(pokemon : PokemonEntity, pokemonEvo0: PokemonEntity? ,pokemonEvo2: PokemonEntity?, pokemonEvo4 : PokemonEntity?, pokemonTranslator: PokemonTranslator ,navController: NavController){
     val pokemonUi = pokemonTranslator.domainToUi(pokemon)
+    val pokemonUiEvo0 = pokemonEvo0?.let { pokemonTranslator.domainToUi(it) }
+    val pokemonUiEvo2 = pokemonEvo2?.let { pokemonTranslator.domainToUi(it) }
+    val pokemonUiEvo4 = pokemonEvo4?.let { pokemonTranslator.domainToUi(it) }
     Surface(color = Color(pokemonUi.backgroundColorValue)) {
         Box(modifier = Modifier.fillMaxWidth()) {
-            TopHeaders(pokemonUi, navController)
+            TopHeaders(navController)
             HeaderRight(pokemonUi)
             HeaderLeft(pokemonUi)
-            SectionsContent(pokemonUi)
+            SectionsContent(pokemonUi,pokemonUiEvo0 ,pokemonUiEvo2, pokemonUiEvo4)
             PokemonImage(pokemonUi)
         }
     }
 }
 
 @Composable
-fun BoxScope.TopHeaders(pokemonui: PokemonUi, navController: NavController){
+fun BoxScope.TopHeaders(navController: NavController){
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -77,14 +91,11 @@ fun BoxScope.TopHeaders(pokemonui: PokemonUi, navController: NavController){
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Icon(
-
             Icons.Filled.ArrowBack,
             tint = Color.White,
             contentDescription = "backIcon",
             modifier = Modifier.clickable {
-                navController.navigate("home")
-            }.shadow(elevation = 5.dp, shape = CircleShape),
-        )
+                navController.popBackStack() })
         Icon(
             Icons.Filled.FavoriteBorder,
             tint = Color.White,
@@ -180,7 +191,7 @@ private fun PowerChip(text: String) {
 
 
 @Composable
-private fun BoxScope.SectionsContent(pokemonui: PokemonUi) {
+private fun BoxScope.SectionsContent(pokemonui: PokemonUi, pokemonuievo0: PokemonUi? = null, pokemonuievo2: PokemonUi? = null, pokemonuievo4: PokemonUi? = null) {
 
     val isSystemInDarkTheme = isSystemInDarkTheme()
 
@@ -237,7 +248,7 @@ private fun BoxScope.SectionsContent(pokemonui: PokemonUi) {
                 when (section) {
                     Sections.About -> AboutSection(pokemonui)
                     Sections.BaseStats -> BaseStatsSection(pokemonui)
-                    Sections.Evolution -> EvolutionSection(pokemonui)
+                    Sections.Evolution -> EvolutionSection(pokemonui, pokemonuievo0, pokemonuievo2, pokemonuievo4)
                     Sections.Moves -> MovesSection(pokemonui)
                 }
             }
