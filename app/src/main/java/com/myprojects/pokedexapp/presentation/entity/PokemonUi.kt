@@ -27,7 +27,6 @@ class PokemonUi (
     val secondary_type:String,
     @DrawableRes val pokemonDrawableResourceId: Int,
     @DrawableRes val pokemonTypeResourceId: Int,
-    //@DrawableRes val pokemonEvolutionResource: Int,
     val backgroundColorValue: Long,
 ) {
 
@@ -37,7 +36,7 @@ class PokemonUi (
 
     fun getLibsFormatted(): String {
         val result: Double = weight_kg * 2.20462
-        return "${result.toString().take(4)} lbs (${weight_kg.toString()} kg)"
+        return "${result.toString().take(4)} lbs ($weight_kg kg)"
     }
 
     fun getHeightFormatted(): String {

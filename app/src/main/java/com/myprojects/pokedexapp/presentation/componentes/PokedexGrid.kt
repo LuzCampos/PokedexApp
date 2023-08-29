@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.data.PokemonEntity
+import com.myprojects.pokedexapp.presentation.common.TitleHeader
 import com.myprojects.pokedexapp.presentation.entity.translator.PokemonTranslator
 
 @Composable
@@ -36,16 +37,7 @@ fun PokedexGrid(pokemonesLista: List<PokemonEntity>, modifier : Modifier,navCont
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ){
             header {
-                Text(
-                    text = "Pokedex",
-                    fontFamily = FontFamily(Font(R.font.circularstdblack)),
-                    color = Color(0xff303943),
-                    modifier = Modifier.padding(bottom = 28.dp),
-                    style = MaterialTheme.typography.h4.copy(
-                        fontWeight =
-                        FontWeight.ExtraBold
-                    )
-                )
+                TitleHeader(text = "Pokedex", Modifier.padding(bottom = 28.dp))
             }
 
             items(pokemonesLista.size) { index ->

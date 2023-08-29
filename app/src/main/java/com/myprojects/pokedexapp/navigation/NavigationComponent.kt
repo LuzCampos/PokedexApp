@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.myprojects.pokedexapp.presentation.detailPokemon.PokemonDetail
 import com.myprojects.pokedexapp.presentation.home.HomeScreen
+import com.myprojects.pokedexapp.presentation.home.ListScreen
 import com.myprojects.pokedexapp.presentation.viewmodels.DetailViewModel
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 
@@ -17,10 +18,16 @@ fun NavigationComponent(
     homeViewModel: HomeViewModel,
     detailViewModel: DetailViewModel
 ) {
-    NavHost(navController = navHostController, startDestination = "home") {
+    NavHost(navController = navHostController, startDestination =
+    "home_screen"
+    //"list_pokedex_screen"
+    ) {
         // First route : Home
-        composable("home") {
+        composable("home_screen") {
             HomeScreen(navController = navHostController, homeViewModel )
+        }
+        composable("list_pokedex_screen") {
+            ListScreen(navController = navHostController, homeViewModel )
         }
         composable("detail?national_number={national_number}&evochain_0={evochain_0}&evochain_2={evochain_2}&evochain_4={evochain_4}",
             arguments = listOf(

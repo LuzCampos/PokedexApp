@@ -21,10 +21,12 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
+import com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet.generation.header
+import com.myprojects.pokedexapp.presentation.home.type.Type
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 
 @Composable
-fun AllType(types: List<Type>,homeViewModel: HomeViewModel) {
+fun AllType(types: List<Type>, homeViewModel: HomeViewModel) {
     Box(
         modifier = Modifier
             .fillMaxWidth()

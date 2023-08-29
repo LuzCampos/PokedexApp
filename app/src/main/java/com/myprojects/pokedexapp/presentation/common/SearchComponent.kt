@@ -1,4 +1,4 @@
-package com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet
+package com.myprojects.pokedexapp.presentation.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,7 +16,11 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.myprojects.pokedexapp.R
@@ -26,7 +30,7 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun SearchComponent(searchText: MutableState<String>, homeViewModel: HomeViewModel) {
+fun SearchComponent(searchText: MutableState<String>, homeViewModel: HomeViewModel, modifier: Modifier) {
 
     val showKeyboard = remember { mutableStateOf(true) }
     val focusRequester = remember { FocusRequester() }
@@ -38,13 +42,13 @@ fun SearchComponent(searchText: MutableState<String>, homeViewModel: HomeViewMod
             .background(Color.White)
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 26.dp, vertical = 20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = modifier,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             TextField(
                 shape = RoundedCornerShape(30.dp),
+                singleLine = true,
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color(0xffF1F1F1),
                     cursorColor = Color(0xffA4A7AB),
@@ -63,11 +67,16 @@ fun SearchComponent(searchText: MutableState<String>, homeViewModel: HomeViewMod
                     )
                 },
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth().height(48.dp)
                     .focusRequester(focusRequester),
                 value = searchText.value,
                 onValueChange = { searchText.value = it; homeViewModel.searchPokemonByName(it) },
-                placeholder = { Text("Search Pokemon, Move, Ability etc", color = Color(0xffA4A7AB), fontSize = 14.sp, fontWeight = FontWeight.Bold) }
+                placeholder = { Text(
+                    "Search Pokemon, Move, Ability etc",
+                    color = Color(0xffA4A7AB),
+                    fontSize = 12.sp,
+                    fontFamily = FontFamily(Font(R.font.circularstdbook)),
+                ) }
             )
 
             LaunchedEffect(focusRequester) {

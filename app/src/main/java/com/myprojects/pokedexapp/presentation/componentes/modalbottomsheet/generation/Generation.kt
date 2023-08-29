@@ -1,4 +1,4 @@
-package com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet
+package com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet.generation
 
 import com.myprojects.pokedexapp.R
 

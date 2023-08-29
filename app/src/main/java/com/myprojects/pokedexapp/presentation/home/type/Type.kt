@@ -1,4 +1,4 @@
-package com.myprojects.pokedexapp.presentation.componentes.modalbottomsheet
+package com.myprojects.pokedexapp.presentation.home.type
 
 import androidx.compose.ui.graphics.Color
 import com.myprojects.pokedexapp.R
