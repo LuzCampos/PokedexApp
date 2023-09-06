@@ -1,5 +1,6 @@
 package com.myprojects.pokedexapp.presentation.detailPokemon.sections
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -10,11 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.presentation.entity.PokemonUi
 
 data class Stat(
-    val label: String,
+    @StringRes val label: Int,
     val value: Int?,
     val max: Int = 100
 ) {
@@ -25,12 +28,12 @@ data class Stat(
 @Composable
 fun BaseStatsSection(pokemonui: PokemonUi) {
     val stats = listOf(
-        Stat("HP", pokemonui.hp),
-        Stat("Attack", pokemonui.attack),
-        Stat("Defense", pokemonui.defense),
-        Stat("Sp. Atk", pokemonui.sp_attack),
-        Stat("Sp. Def", pokemonui.sp_defense),
-        Stat("Speed", pokemonui.speed),
+        Stat(R.string.msg_basestats_hp, pokemonui.hp),
+        Stat(R.string.msg_basestats_attack, pokemonui.attack),
+        Stat(R.string.msg_basestats_defense, pokemonui.defense),
+        Stat(R.string.msg_basestats_spatk, pokemonui.sp_attack),
+        Stat(R.string.msg_basestats_spdef, pokemonui.sp_defense),
+        Stat(R.string.msg_basestats_speed, pokemonui.speed),
     )
     TableScreen(stats = stats)
 }
@@ -51,7 +54,7 @@ fun TableScreen(stats: List<Stat>) {
            // val (id, text) = it
             Row(Modifier.fillMaxWidth()) {
                 TableCell1(
-                    text = it.label, weight = column1Weight, Color(0xff83888E)
+                    text = stringResource(id = it.label), weight = column1Weight, Color(0xff83888E)
                 )
                 TableCell1(
                     text = it.value.toString(),
@@ -91,7 +94,10 @@ fun RowScope.LinearBase(progress: Float,weight: Float){
    }
 
    LinearProgressIndicator(
-       modifier = Modifier.weight(weight).padding(top = 18.dp).clip(RoundedCornerShape(10.dp)),
+       modifier = Modifier
+           .weight(weight)
+           .padding(top = 18.dp)
+           .clip(RoundedCornerShape(10.dp)),
        progress = progress,
        color = color,
        backgroundColor = Color(0xffF5F6F5)

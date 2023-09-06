@@ -25,7 +25,9 @@ class HomeViewModel @Inject constructor(private val pokedexRepository: PokedexRe
 
     fun getPokemonByGeneration(generation: String) { pokedexRepository.getPokemonByGeneration(generation) }
 
-    fun getPokemonByType(type: String) { pokedexRepository.getPokemonByType(type) }
+    fun getPokemonByType(type: String) {
+        pokedexRepository.getPokemonByType(type)
+    }
 
     fun searchPokemonByName(searchText:String){
         viewModelScope.launch {

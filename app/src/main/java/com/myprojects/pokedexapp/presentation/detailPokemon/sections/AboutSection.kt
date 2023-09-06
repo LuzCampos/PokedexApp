@@ -1,6 +1,7 @@
 package com.myprojects.pokedexapp.presentation.detailPokemon.sections
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -10,6 +11,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.*
 import com.myprojects.pokedexapp.R
@@ -19,26 +21,28 @@ import java.util.*
 
 @Composable
 fun AboutSection(pokemonui: PokemonUi) {
-    Column(
-        modifier = Modifier.fillMaxSize().padding(horizontal = 6.dp, vertical = 8.dp),
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 6.dp, vertical = 8.dp),
         //contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ){
-        Description(pokemonui.description)
-        DimensionesPokemon(pokemonui)
-        Breeding(pokemonui,
+        item { Description(pokemonui.description) }
+        item { DimensionesPokemon(pokemonui) }
+        item { Breeding(pokemonui,
             Modifier
                 .fillMaxWidth()
-                )
+        )}
     }
 }
 @Composable
 fun Breeding(pokemonui: PokemonUi, modifier: Modifier) {
     Column(verticalArrangement = Arrangement.SpaceBetween, modifier = modifier
         ) {
-        Text(modifier= Modifier.padding(vertical = 6.dp),text = "Breeding", fontWeight = FontWeight.ExtraBold)
-        BreedingRow(breedingText = "Gender", pokemonui = pokemonui)
-        BreedingRow(breedingText = "Egg cycle", pokemonui = pokemonui)
+        Text(modifier= Modifier.padding(vertical = 6.dp),text = stringResource(id = R.string.msg_about_breeding), fontWeight = FontWeight.ExtraBold)
+        BreedingRow(breedingText = stringResource(id = R.string.msg_about_gender), pokemonui = pokemonui)
+        BreedingRow(breedingText = stringResource(id = R.string.msg_about_eggcycle), pokemonui = pokemonui)
     }
 }
 
@@ -47,7 +51,7 @@ fun BreedingRow(breedingText:String, pokemonui: PokemonUi){
     Row( modifier = Modifier.padding(vertical = 10.dp),
         horizontalArrangement = Arrangement.SpaceEvenly) {
         BreedingTitle(texto = breedingText)
-        if(breedingText == "Gender"){
+        if(breedingText == stringResource(id = R.string.msg_about_gender)){
             GenderTextValue(gender = "${pokemonui.percent_male}", icono = R.drawable.gendermale)
             GenderTextValue(gender = "${pokemonui.percent_female}", icono = R.drawable.genderfemale)
         } else {
@@ -85,14 +89,15 @@ fun DimensionesPokemon(pokemonui: PokemonUi){
     Card(
       //  elevation = 10.dp,
         modifier = Modifier
-            .fillMaxWidth().padding(vertical = 10.dp)
+            .fillMaxWidth()
+            .padding(vertical = 10.dp)
             .shadow(ambientColor = Color.White, elevation = 8.dp),
         shape = RoundedCornerShape(12.dp)
     ) {
         Row(horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.padding(horizontal = 24.dp, vertical = 10.dp)) {
-            Dimension(title = "Height", dimension = pokemonui.getHeightFormatted())
-            Dimension(title = "Weight", dimension = pokemonui.getLibsFormatted())
+            Dimension(title = stringResource(id = R.string.msg_about_height), dimension = pokemonui.getHeightFormatted())
+            Dimension(title = stringResource(id = R.string.msg_about_weight), dimension = pokemonui.getLibsFormatted())
         }
     }
 }

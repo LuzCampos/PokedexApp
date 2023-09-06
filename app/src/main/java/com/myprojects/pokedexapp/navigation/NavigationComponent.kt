@@ -53,7 +53,8 @@ fun NavigationComponent(
                 evochain_0 = backStackEntry.arguments?.getString("evochain_0"),
                 evochain_2 = backStackEntry.arguments?.getString("evochain_2"),
                 evochain_4 = backStackEntry.arguments?.getString("evochain_4"),
-                detailViewModel = detailViewModel, navController = navHostController)
+                detailViewModel,
+                navController = navHostController)
         }
     }
 }

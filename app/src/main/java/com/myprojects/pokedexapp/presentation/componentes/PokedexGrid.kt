@@ -2,24 +2,20 @@ package com.myprojects.pokedexapp.presentation.componentes
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.*
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.data.PokemonEntity
 import com.myprojects.pokedexapp.presentation.common.TitleHeader
 import com.myprojects.pokedexapp.presentation.entity.translator.PokemonTranslator
+import com.myprojects.pokedexapp.R
 
 @Composable
 fun PokedexGrid(pokemonesLista: List<PokemonEntity>, modifier : Modifier,navController: NavController){
@@ -37,7 +33,7 @@ fun PokedexGrid(pokemonesLista: List<PokemonEntity>, modifier : Modifier,navCont
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ){
             header {
-                TitleHeader(text = "Pokedex", Modifier.padding(bottom = 28.dp))
+                TitleHeader(text = stringResource(id = R.string.msg_pokedex_title), Modifier.padding(bottom = 28.dp))
             }
 
             items(pokemonesLista.size) { index ->
@@ -62,7 +58,7 @@ fun PokedexGrid(pokemonesLista: List<PokemonEntity>, modifier : Modifier,navCont
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                "No pokemons yet.",
+                stringResource(id = R.string.msg_empty_pokedex),
                 fontSize = 20.sp,
                 modifier = Modifier
                     .wrapContentWidth()

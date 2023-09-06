@@ -1,11 +1,11 @@
 package com.myprojects.pokedexapp.presentation.detailPokemon
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
@@ -17,18 +17,19 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.data.PokemonEntity
+import com.myprojects.pokedexapp.presentation.common.CustomAppBar
 import com.myprojects.pokedexapp.presentation.detailPokemon.sections.AboutSection
 import com.myprojects.pokedexapp.presentation.detailPokemon.sections.BaseStatsSection
 import com.myprojects.pokedexapp.presentation.detailPokemon.sections.EvolutionSection
@@ -36,7 +37,7 @@ import com.myprojects.pokedexapp.presentation.detailPokemon.sections.MovesSectio
 import com.myprojects.pokedexapp.presentation.entity.PokemonUi
 import com.myprojects.pokedexapp.presentation.entity.translator.PokemonTranslator
 import com.myprojects.pokedexapp.presentation.viewmodels.DetailViewModel
-import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
+import com.myprojects.pokedexapp.R
 import java.util.*
 
 @Composable
@@ -45,7 +46,7 @@ fun PokemonDetail(
     evochain_0: String?,
     evochain_2: String?,
     evochain_4: String?,
-    detailViewModel: DetailViewModel,
+    detailViewModel: DetailViewModel = hiltViewModel(),
     navController: NavController
 ) {
     val pokemonTranslator = remember {
@@ -71,7 +72,7 @@ fun Contenido(pokemon : PokemonEntity, pokemonEvo0: PokemonEntity? ,pokemonEvo2:
     val pokemonUiEvo4 = pokemonEvo4?.let { pokemonTranslator.domainToUi(it) }
     Surface(color = Color(pokemonUi.backgroundColorValue)) {
         Box(modifier = Modifier.fillMaxWidth()) {
-            TopHeaders(navController)
+            CustomAppBar(onClick = { navController.popBackStack()}, tint = Color.White)
             HeaderRight(pokemonUi)
             HeaderLeft(pokemonUi)
             SectionsContent(pokemonUi,pokemonUiEvo0 ,pokemonUiEvo2, pokemonUiEvo4)
@@ -93,23 +94,23 @@ fun BoxScope.TopHeaders(navController: NavController){
         Icon(
             Icons.Filled.ArrowBack,
             tint = Color.White,
-            contentDescription = "backIcon",
+            contentDescription = "",
             modifier = Modifier.clickable {
                 navController.popBackStack() })
         Icon(
             Icons.Filled.FavoriteBorder,
             tint = Color.White,
-            contentDescription = "backIcon"
+            contentDescription = ""
         )
 
     }
 }
 
-private enum class Sections(val title: String) {
-    About("About"),
-    BaseStats("Base Stats"),
-    Evolution("Evolution"),
-    Moves("Moves")
+private enum class Sections(@StringRes val title: Int) {
+    About(R.string.detail_pokemon_about),
+    BaseStats(R.string.detail_pokemon_basestats),
+    Evolution(R.string.detail_pokemon_evolution),
+    Moves(R.string.detail_pokemon_moves)
 }
 
 @Composable
@@ -238,7 +239,7 @@ private fun BoxScope.SectionsContent(pokemonui: PokemonUi, pokemonuievo0: Pokemo
                     Tab(
                         selected = section.ordinal == index,
                         onClick = { section = Sections.values()[index] },
-                        text = { Text(text, fontSize = 12.sp) },
+                        text = { Text(stringResource(id = text), fontSize = 12.sp) },
                         selectedContentColor = Color(0xff303943),
                         unselectedContentColor = Color.LightGray
                     )
@@ -265,5 +266,5 @@ private fun BoxScope.PokemonImage(pokemon: PokemonUi) {
             .padding(top = 158.dp),
         painter = painterResource(id = pokemon.pokemonDrawableResourceId),
         alpha = 1.0f,
-        contentDescription = "pokemonimagedetail" )
+        contentDescription = "" )
 }

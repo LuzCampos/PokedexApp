@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -30,7 +31,7 @@ fun PokemonNews() {
 @Composable
 fun ComposableNews(news: List<News>){
     LazyColumn(
-        modifier = Modifier.padding(top = 48.dp)
+        modifier = Modifier.padding(top = 40.dp)
     ){
         item {
             Titles()
@@ -46,7 +47,9 @@ fun ComposableNews(news: List<News>){
 
 @Composable
 fun Texto(new: News){
-    Box(modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp)) {
+    Box(modifier = Modifier
+        .fillMaxWidth()
+        .padding(vertical = 10.dp)) {
         Column(modifier = Modifier.align(Alignment.CenterStart), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(
                 modifier = Modifier.width(186.dp),
@@ -63,7 +66,8 @@ fun Texto(new: News){
         Image(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .clip(RoundedCornerShape(16)).size(width = 110.dp, height = 60.dp),
+                .clip(RoundedCornerShape(16))
+                .size(width = 110.dp, height = 60.dp),
             painter = painterResource(id = new.image),
             contentScale = ContentScale.Crop,
             contentDescription = "newsImage")
@@ -73,7 +77,7 @@ fun Texto(new: News){
 @Composable
 fun Titles() {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-        Text(text = "Pokémon News",
+        Text(text = stringResource(id = R.string.news_title),
             style = TextStyle(
                 fontFamily = FontFamily(Font(R.font.circularstdblack)),
                 lineHeight = 42.sp,
@@ -81,7 +85,7 @@ fun Titles() {
                 fontSize = 18.sp
             )
             )
-        Text(text = "View All",
+        Text(text = stringResource(id = R.string.news_item_viewall),
             style = TextStyle(
                 fontFamily = FontFamily(Font(R.font.circularstdbold)),
                 color = Color(0xff6C79DB),

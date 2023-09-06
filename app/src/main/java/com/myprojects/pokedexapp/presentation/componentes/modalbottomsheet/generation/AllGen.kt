@@ -16,9 +16,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.myprojects.pokedexapp.R
 import androidx.compose.foundation.Image
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.stringResource
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 
 @Composable
@@ -39,7 +41,7 @@ fun AllGen(generation: List<Generation>,homeViewModel: HomeViewModel) {
         ) {
             header {
                 Text(
-                    text = "Generation",
+                    text = stringResource(id = R.string.msg_generation_title),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h5.copy(
                         fontWeight =
@@ -74,7 +76,7 @@ private fun CardGeneration(generation: Generation,homeViewModel: HomeViewModel){
             Column(modifier = Modifier
                 .align(Alignment.Center)
             ) {
-                Text(text = generation.label,
+                Text(text = stringResource(id = generation.label),
                     color = Color.Black,
                     fontSize = 16.sp, modifier = Modifier.padding(vertical = 5.dp))
                 Spacer(modifier = Modifier.height(8.dp))

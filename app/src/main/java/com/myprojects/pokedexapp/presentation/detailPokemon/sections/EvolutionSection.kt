@@ -3,6 +3,8 @@ package com.myprojects.pokedexapp.presentation.detailPokemon.sections
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -12,42 +14,58 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.presentation.entity.PokemonUi
+import com.myprojects.pokedexapp.R
 
 @Composable
 fun EvolutionSection(pokemonui: PokemonUi,evochain_0_ui: PokemonUi? = null ,evochain_2_ui: PokemonUi? = null, evochain_4_ui : PokemonUi? = null) {
-    Column(modifier = Modifier
+    LazyColumn(modifier = Modifier
         .fillMaxSize()
         .padding(horizontal = 20.dp)) {
-        Titulo()
-        if (evochain_2_ui != null) {
+        item { Titulo() }
+        item {
+            if (evochain_2_ui != null) {
             if (pokemonui.english_name != evochain_2_ui.english_name) {
                 EvolutionRow(pokemonui = pokemonui,
-                    pokemonuiAdd = evochain_2_ui)
+                    pokemonuiAdd = evochain_2_ui) }
             }
-        }
-        if (evochain_4_ui != null ) {
-            if (evochain_2_ui != null) {
-                EvolutionRow(pokemonui = evochain_2_ui, pokemonuiAdd = evochain_4_ui )
+            if (evochain_4_ui != null ) {
+                if (evochain_2_ui != null) {
+                    EvolutionRow(pokemonui = evochain_2_ui, pokemonuiAdd = evochain_4_ui )
+                }
             }
-        } else if (evochain_0_ui != null && evochain_2_ui != null) {
-            if(evochain_0_ui.english_name != pokemonui.english_name){
-                EvolutionRow(pokemonui = evochain_0_ui, pokemonuiAdd = evochain_2_ui )
+            else if (evochain_0_ui != null && evochain_2_ui != null) {
+               if(evochain_0_ui.english_name != pokemonui.english_name){
+                    EvolutionRow(pokemonui = evochain_0_ui, pokemonuiAdd = evochain_2_ui )
+               }
             }
         }
     }
 }
 
 @Composable
+fun EvolutionBox(){
+    Box() {
+
+    }
+}
+
+@Composable
+fun EvolutionPokemonImg(){
+        Column() {
+            Image(painter = painterResource(id = R.drawable.pokeballicon), contentDescription = "")
+        }
+}
+@Composable
 fun Titulo(){
     Text(
         modifier = Modifier.padding(vertical = 10.dp),
-        text = "Evolution Chain",
+        text = stringResource(id = R.string.msg_evolution_title),
         color = Color(0xff303943),
         fontSize = 16.sp,
         fontFamily = FontFamily(Font(R.font.circularstdbold)),
@@ -76,7 +94,7 @@ fun Evolution(idImg:Int, evochain : String){
         Image(
             modifier = Modifier
                 .weight(2f),
-            painter = painterResource(idImg), contentDescription = "imgPkmn" )
+            painter = painterResource(idImg), contentDescription = "" )
         Text(
             modifier = Modifier
                 .weight(1f) ,

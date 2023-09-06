@@ -3,6 +3,7 @@ package com.myprojects.pokedexapp.presentation.detailPokemon.sections
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -15,26 +16,31 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.myprojects.pokedexapp.presentation.entity.PokemonUi
+import com.myprojects.pokedexapp.R
 import java.util.*
 
 @Composable
 fun MovesSection(pokemonui: PokemonUi) {
-    Column(modifier = Modifier
+    LazyColumn(modifier = Modifier
+        .fillMaxSize()
         .fillMaxSize()
         .padding(horizontal = 10.dp, vertical = 10.dp),
         //verticalArrangement = Arrangement.Center,
         // horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Title("Abilities")
-        AbilitiesRow(pokemonui = pokemonui)
-        Box(modifier = Modifier.height(10.dp))
-        if (pokemonui.abilities_hidden.isNotBlank() || pokemonui.abilities_hidden.isNotBlank())
-            Title(title = "Hidden Abilities")
-        AbilitiesHidden(pokemonui = pokemonui)
+        item { Title(stringResource(id = R.string.msg_moves_abilities)) }
+        item { AbilitiesRow(pokemonui = pokemonui) }
+        item {
+            Box(modifier = Modifier.height(10.dp))
+            if (pokemonui.abilities_hidden.isNotBlank() || pokemonui.abilities_hidden.isNotBlank())
+                Title(title = stringResource(id = R.string.msg_moves_title_hidden_abilities))
+            AbilitiesHidden(pokemonui = pokemonui)
+        }
     }
 }
 

@@ -14,15 +14,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val homeViewModel: HomeViewModel by viewModels()
-    private val detailViewModel: DetailViewModel by viewModels()
+   private val homeViewModel: HomeViewModel by viewModels()
+   private val detailViewModel: DetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             PokedexAppTheme {
                 // A surface container using the 'background' color from the theme
-                NavigationComponent(navHostController = rememberNavController(), homeViewModel = homeViewModel, detailViewModel = detailViewModel )
+                NavigationComponent(navHostController = rememberNavController(), homeViewModel,detailViewModel)
             }
         }
     }
