@@ -81,6 +81,14 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
+    //Coil Image
     implementation("io.coil-kt:coil-compose:2.2.2")
     implementation("io.coil-kt:coil-svg:2.2.2")
+
+    //Glance
+    // For AppWidgets support
+    implementation "androidx.glance:glance:1.0.0-alpha05"
+    implementation "androidx.glance:glance-appwidget:1.0.0-alpha05"
+
+
 }

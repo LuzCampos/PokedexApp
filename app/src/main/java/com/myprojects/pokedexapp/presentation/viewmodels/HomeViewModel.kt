@@ -8,6 +8,8 @@ import com.myprojects.pokedexapp.PokedexScreenState
 import com.myprojects.pokedexapp.data.PokemonEntity
 import com.myprojects.pokedexapp.repository.PokedexRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.invoke
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,7 +28,9 @@ class HomeViewModel @Inject constructor(private val pokedexRepository: PokedexRe
     fun getPokemonByGeneration(generation: String) { pokedexRepository.getPokemonByGeneration(generation) }
 
     fun getPokemonByType(type: String) {
-        pokedexRepository.getPokemonByType(type)
+        viewModelScope.launch {
+            pokedexRepository.getPokemonByType(type)
+        }
     }
 
     fun searchPokemonByName(searchText:String){
