@@ -1,5 +1,6 @@
 package com.myprojects.pokedexapp.presentation.home.news
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.myprojects.pokedexapp.R
@@ -36,9 +38,8 @@ fun ComposableNews(news: List<News>){
         item {
             Titles()
         }
-
         items(news.size){ index ->
-            Texto(new = news[index])
+            CardNews(new = news[index])
                 Divider()
 
         }
@@ -46,7 +47,7 @@ fun ComposableNews(news: List<News>){
 }
 
 @Composable
-fun Texto(new: News){
+fun CardNews(new: News){
     Box(modifier = Modifier
         .fillMaxWidth()
         .padding(vertical = 10.dp)) {
@@ -62,7 +63,6 @@ fun Texto(new: News){
                 fontSize = 10.sp,
                 text = new.date)
         }
-
         Image(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
@@ -76,21 +76,31 @@ fun Texto(new: News){
 
 @Composable
 fun Titles() {
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-        Text(text = stringResource(id = R.string.news_title),
-            style = TextStyle(
-                fontFamily = FontFamily(Font(R.font.circularstdblack)),
-                lineHeight = 42.sp,
-                color = Color(0xff303943),
-                fontSize = 18.sp
-            )
-            )
-        Text(text = stringResource(id = R.string.news_item_viewall),
-            style = TextStyle(
-                fontFamily = FontFamily(Font(R.font.circularstdbold)),
-                color = Color(0xff6C79DB),
-                lineHeight = 42.sp,
-                fontSize = 14.sp
-            ))
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        TextTitle(
+                id = R.string.news_title,
+                resId = R.font.circularstdblack,
+                color = 0xff303943,
+                fontSize = 18.sp)
+        TextTitle(
+                id = R.string.news_item_viewall,
+                resId = R.font.circularstdbold,
+                color = 0xff6C79DB,
+                fontSize = 14.sp)
     }
+}
+
+@Composable
+fun TextTitle(@StringRes id : Int, resId : Int, color : Long,fontSize : TextUnit){
+    Text(text = stringResource(id = id),
+        style = TextStyle(
+            fontFamily = FontFamily(Font(resId)),
+            lineHeight = 42.sp,
+            color = Color(color),
+            fontSize = fontSize
+        )
+    )
 }

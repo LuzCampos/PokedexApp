@@ -1,10 +1,8 @@
 package com.myprojects.pokedexapp.presentation.detailPokemon.sections
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -46,20 +44,6 @@ fun EvolutionSection(pokemonui: PokemonUi,evochain_0_ui: PokemonUi? = null ,evoc
             }
         }
     }
-}
-
-@Composable
-fun EvolutionBox(){
-    Box() {
-
-    }
-}
-
-@Composable
-fun EvolutionPokemonImg(){
-        Column() {
-            Image(painter = painterResource(id = R.drawable.pokeballicon), contentDescription = "")
-        }
 }
 @Composable
 fun Titulo(){

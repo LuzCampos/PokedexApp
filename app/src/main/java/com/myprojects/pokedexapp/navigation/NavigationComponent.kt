@@ -1,5 +1,6 @@
 package com.myprojects.pokedexapp.navigation
 
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
@@ -9,6 +10,7 @@ import androidx.navigation.navArgument
 import com.myprojects.pokedexapp.presentation.detailPokemon.PokemonDetail
 import com.myprojects.pokedexapp.presentation.home.HomeScreen
 import com.myprojects.pokedexapp.presentation.home.ListScreen
+import com.myprojects.pokedexapp.presentation.onboarding.OnBoardingScreen
 import com.myprojects.pokedexapp.presentation.viewmodels.DetailViewModel
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 
@@ -19,12 +21,18 @@ fun NavigationComponent(
     detailViewModel: DetailViewModel
 ) {
     NavHost(navController = navHostController, startDestination =
-    "home_screen"
+    "onboarding_screen"
     //"list_pokedex_screen"
     ) {
         // First route : Home
+        composable("onboarding_screen") {
+            OnBoardingScreen(navController = navHostController)
+        }
         composable("home_screen") {
             HomeScreen(navController = navHostController, homeViewModel )
+        }
+        composable("crash_screen") {
+            CrashScreen()
         }
         composable("list_pokedex_screen") {
             ListScreen(navController = navHostController, homeViewModel )
@@ -56,5 +64,12 @@ fun NavigationComponent(
                 detailViewModel,
                 navController = navHostController)
         }
+    }
+}
+
+@Composable
+fun CrashScreen() {
+    Button(onClick = { throw RuntimeException("Test Crash")  }) {
+        Text(text = "BUG")
     }
 }

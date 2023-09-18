@@ -52,4 +52,5 @@
     <string name="msg_steel">Steel</string>
     <string name="msg_ground">Ground</string>
     <string name="msg_bug">Bug</string>
+    <string name="title_onboardingscreen">What type of\nPokemon master\nare you?</string>
 </resources>

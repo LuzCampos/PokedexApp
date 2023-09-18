@@ -17,7 +17,7 @@ class PokedexRepository (private val pokedexDao: PokedexDao) {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     fun getAllPokemons(){
-        coroutineScope.launch {pokemones.postValue(pokedexDao.obtenerPokemons())}
+        coroutineScope.launch(Dispatchers.IO) {pokemones.postValue(pokedexDao.obtenerPokemons())}
     }
 
     fun getPokemon(pokemonId: Int){

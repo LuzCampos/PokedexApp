@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:minWidth="60dp"
-    android:minHeight="60dp"
+    android:minWidth="50dp"
+    android:minHeight="50dp"
     android:updatePeriodMillis="86400000"
     android:previewImage="@drawable/pikachu_3x"
     android:initialLayout="@layout/glance_default_loading_layout"
