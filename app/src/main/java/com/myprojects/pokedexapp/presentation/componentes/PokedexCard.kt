@@ -1,7 +1,5 @@
 package com.myprojects.pokedexapp.presentation.componentes
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -13,10 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.myprojects.pokedexapp.R
+import com.myprojects.pokedexapp.presentation.common.PokeballImage
+import com.myprojects.pokedexapp.presentation.common.PokemonImage
 import com.myprojects.pokedexapp.presentation.entity.PokemonUi
 import java.util.*
 
@@ -83,26 +81,6 @@ fun PowerChip(text: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Composable
-fun PokemonImage(
-    @DrawableRes drawableResourceId: Int,
-    modifier: Modifier = Modifier
-) {
-    Image(
-        painter = painterResource(drawableResourceId),
-        contentDescription = "Bulbasaur",
-        modifier = modifier
-            //.fillMaxWidth(.5f)
-            .size(width = 72.dp, height = 72.dp)
-    )
-}
 
-@Composable
-fun PokeballImage(modifier: Modifier = Modifier) {
-    Image(
-        painter = painterResource(R.drawable.pokeball),
-        contentDescription = "Pokeball Shadow",
-        modifier = modifier.size(width = 88.dp, height = 76.dp),
-        //colorFilter = ColorFilter.tint(color = Color.White)
-    )
-}
+
+

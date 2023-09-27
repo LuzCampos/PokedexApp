@@ -41,7 +41,6 @@ fun ComposableNews(news: List<News>){
         items(news.size){ index ->
             CardNews(new = news[index])
                 Divider()
-
         }
     }
 }

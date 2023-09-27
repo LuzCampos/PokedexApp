@@ -10,7 +10,10 @@ import androidx.navigation.navArgument
 import com.myprojects.pokedexapp.presentation.detailPokemon.PokemonDetail
 import com.myprojects.pokedexapp.presentation.home.HomeScreen
 import com.myprojects.pokedexapp.presentation.home.ListScreen
+import com.myprojects.pokedexapp.presentation.home.type.types
 import com.myprojects.pokedexapp.presentation.onboarding.OnBoardingScreen
+import com.myprojects.pokedexapp.presentation.onboarding.QueMaestroEres
+import com.myprojects.pokedexapp.presentation.onboarding.WhatTypeOfPokemonMaster
 import com.myprojects.pokedexapp.presentation.viewmodels.DetailViewModel
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
 
@@ -21,12 +24,16 @@ fun NavigationComponent(
     detailViewModel: DetailViewModel
 ) {
     NavHost(navController = navHostController, startDestination =
-    "onboarding_screen"
-    //"list_pokedex_screen"
+            "quemaestroeres_screen"
+            //"list_pokedex_screen"
     ) {
         // First route : Home
+        composable("quemaestroeres_screen") {
+            QueMaestroEres(navController = navHostController)
+            //WhatTypeOfPokemonMaster(types = types)
+        }
         composable("onboarding_screen") {
-            OnBoardingScreen(navController = navHostController)
+            OnBoardingScreen(navController = navHostController, homeViewModel)
         }
         composable("home_screen") {
             HomeScreen(navController = navHostController, homeViewModel )

@@ -4,14 +4,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,33 +36,21 @@ import kotlinx.coroutines.launch
 @Composable
 fun ListScreen( navController: NavController, homeViewModel: HomeViewModel = hiltViewModel()){
 
-   // val uiState by homeViewModel.uiState.observeAsState()
-
-    var multiFloatingState by remember {
-        mutableStateOf(MultiFloatingState.Collapsed)
-    }
+    var multiFloatingState by remember { mutableStateOf(MultiFloatingState.Collapsed) }
 
     val context = LocalContext.current
 
     val searchText = remember { mutableStateOf("") }
 
-    var currentBottomSheet: BottomSheetType? by remember{
-        mutableStateOf(null)
-    }
+    var currentBottomSheet: BottomSheetType? by remember{ mutableStateOf(null) }
 
-    val modalBottomSheetState = rememberModalBottomSheetState(
-        ModalBottomSheetValue.Hidden
-    )
+    val modalBottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
 
     val scope = rememberCoroutineScope()
 
-    val closeSheet = {
-        scope.launch { modalBottomSheetState.hide() }
-    }
+    val closeSheet = { scope.launch { modalBottomSheetState.hide() } }
 
-    val openSheet = {
-        scope.launch { modalBottomSheetState.show() }
-    }
+    val openSheet = { scope.launch { modalBottomSheetState.show() } }
 
     val pokemonesLista: List<PokemonEntity> by homeViewModel.pokemonesLista.observeAsState(initial = listOf())
 
@@ -138,9 +123,6 @@ fun ListScreen( navController: NavController, homeViewModel: HomeViewModel = hil
     }
 }
 
-
-
-
 @Composable
 fun PokedexSuccess(pokemons: List<PokemonEntity>, modifier: Modifier = Modifier,navController: NavController) {
     PokedexGrid(pokemonesLista = pokemons, modifier,navController)
@@ -166,7 +148,6 @@ fun PokedexError(tryAgain: String, modifier: Modifier = Modifier) {
         TextButton(onClick = {  }) {
             Text(stringResource(id = R.string.msg_try_again))
         }
-
     }
 }
 

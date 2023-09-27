@@ -1,5 +1,6 @@
 package com.myprojects.pokedexapp.presentation.common
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -28,4 +29,36 @@ fun BoxScope.PokeBallBackground(){
             colorFilter = ColorFilter.tint(color = Color(0xff303943).copy(0.06f))
         )
     }
+}
+
+@Composable
+fun PokeballImageCard(modifier: Modifier = Modifier) {
+    Image(
+        painter = painterResource(R.drawable.pokedexcard),
+        contentDescription = "Pokeball Shadow",
+        modifier = modifier.size(width = 88.dp, height = 76.dp),
+    )
+}
+
+@Composable
+fun PokemonImage(
+    @DrawableRes drawableResourceId: Int,
+    modifier: Modifier = Modifier
+) {
+    Image(
+        painter = painterResource(drawableResourceId),
+        contentDescription = "",
+        modifier = modifier
+            //.fillMaxWidth(.5f)
+            .size(width = 72.dp, height = 72.dp)
+    )
+}
+
+@Composable
+fun PokeballImage(modifier: Modifier = Modifier) {
+    Image(
+        painter = painterResource(R.drawable.pokeball),
+        contentDescription = "Pokeball Shadow",
+        modifier = modifier.size(width = 88.dp, height = 76.dp),
+    )
 }
