@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -33,7 +34,11 @@ fun PokedexGrid(pokemonesLista: List<PokemonEntity>, modifier : Modifier,navCont
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ){
             header {
-                TitleHeader(text = stringResource(id = R.string.msg_pokedex_title), Modifier.padding(bottom = 28.dp))
+                TitleHeader(
+                    text = stringResource(id = R.string.msg_pokedex_title),
+                    Modifier.padding(bottom = 28.dp),
+                    Color(0xff303943)
+                )
             }
 
             items(pokemonesLista.size) { index ->

@@ -24,7 +24,7 @@ fun PokedexGridView(pokemons : List<Pokemon>){
     Column(
         modifier = Modifier.height(400.dp),
     ) {
-        TitleHeader(text = "Capture Your First Pokemon", modifier = Modifier)
+        TitleHeader(text = "Capture Your First Pokemon", modifier = Modifier, Color(0xff303943))
         FlowRow(
             modifier = Modifier.padding(top = 26.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),

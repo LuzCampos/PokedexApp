@@ -13,12 +13,12 @@ import androidx.compose.ui.unit.sp
 import com.myprojects.pokedexapp.R
 
 @Composable
-fun TitleHeader(text:String, modifier:Modifier) {
+fun TitleHeader(text:String, modifier:Modifier, color: Color) {
     Text(
         text = text,
         style = TextStyle(
             fontFamily = FontFamily(Font(R.font.circularstdblack)),
-            color = Color(0xff303943),
+            color = color,
             fontWeight = FontWeight.ExtraBold,
             fontSize = 26.sp,
             textAlign = TextAlign.Start,

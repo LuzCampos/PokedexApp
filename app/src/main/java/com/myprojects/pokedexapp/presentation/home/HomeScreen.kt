@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,7 +40,8 @@ fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel = hilt
                 //"What Pokemon\nare you looking for?",
                 Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .height(100.dp),
+                Color(0xff303943)
             )
             SearchComponent(
                 searchText = searchText,

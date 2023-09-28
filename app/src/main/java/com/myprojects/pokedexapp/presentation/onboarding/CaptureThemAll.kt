@@ -32,7 +32,7 @@ fun CaptureThemAll() {
         modifier = Modifier.height(400.dp),
         verticalArrangement = Arrangement.Top
     ) {
-        TitleHeader(text = "Captúralos", modifier = Modifier.align(Alignment.CenterHorizontally))
+        TitleHeader(text = "Captúralos", modifier = Modifier.align(Alignment.CenterHorizontally),Color(0xff303943))
         Column(
             modifier = Modifier.padding(top = 36.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)) {

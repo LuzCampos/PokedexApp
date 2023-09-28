@@ -13,6 +13,7 @@ import com.myprojects.pokedexapp.presentation.home.ListScreen
 import com.myprojects.pokedexapp.presentation.home.type.types
 import com.myprojects.pokedexapp.presentation.onboarding.OnBoardingScreen
 import com.myprojects.pokedexapp.presentation.onboarding.QueMaestroEres
+import com.myprojects.pokedexapp.presentation.onboarding.SleepTimeScreen
 import com.myprojects.pokedexapp.presentation.onboarding.WhatTypeOfPokemonMaster
 import com.myprojects.pokedexapp.presentation.viewmodels.DetailViewModel
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
@@ -23,11 +24,17 @@ fun NavigationComponent(
     homeViewModel: HomeViewModel,
     detailViewModel: DetailViewModel
 ) {
-    NavHost(navController = navHostController, startDestination =
-            "quemaestroeres_screen"
+    NavHost(
+        navController = navHostController,
+        startDestination = "sleeptime_screen"
+        //"quemaestroeres_screen"
             //"list_pokedex_screen"
     ) {
         // First route : Home
+        composable("sleeptime_screen") {
+            SleepTimeScreen()
+            //WhatTypeOfPokemonMaster(types = types)
+        }
         composable("quemaestroeres_screen") {
             QueMaestroEres(navController = navHostController)
             //WhatTypeOfPokemonMaster(types = types)
