@@ -20,29 +20,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.myprojects.pokedexapp.R
 
-data class CardTimeItem(val selectedTimeItem : String)
-
-val itemsTime = listOf(
-    CardTimeItem("7 horas o menos"),
-    CardTimeItem("7-9 horas"),
-    CardTimeItem("9-12 horas"),
-    CardTimeItem("12 horas o más")
-)
-
 @Composable
-fun SleepTimeScreen() {
+fun SleepTimeScreen(state: QuestionSleepTimeScreenState) {
+    val title = state.title
+    val answers = state.answers
+    val backgroundResourceId = state.backgroundResourceId
+    val color = state.color
 
     var defaultSelectedItemIndex by remember { mutableStateOf(-1) }
 
     Box(
-        modifier = Modifier.fillMaxSize().background(Color(0xff6160ec))
+        modifier = Modifier.fillMaxSize().background(Color(color))
     ) {
         // Fondo
         Box(
             modifier = Modifier.fillMaxWidth().aspectRatio(1.5f),
         ) {
             Image(
-                painter = painterResource(id = R.drawable.bg_winter),
+                painter = painterResource(id = backgroundResourceId),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
@@ -55,8 +50,8 @@ fun SleepTimeScreen() {
         )
         {
             Text(
-                text = "¿Cuánto duermes\nhábitualmente por la noche?",
-                modifier = Modifier.align(Alignment.Start).padding(bottom = 26.dp),
+                text = title,
+                modifier = Modifier.align(Alignment.Start).padding(bottom = 24.dp),
                 color = Color.White,
                 fontSize = 22.sp,
                 lineHeight = 26.sp,
@@ -64,7 +59,7 @@ fun SleepTimeScreen() {
                 textAlign = TextAlign.Start,
                 fontFamily = FontFamily(Font(R.font.circularstdblack))
             )
-            itemsTime.forEachIndexed { index, cardTimeItem ->
+            answers.forEachIndexed { index, cardTimeItem ->
                 val isSelected = index == defaultSelectedItemIndex
                 val backgroundColor = if (isSelected) Color(0xff301F84) else Color(0xffFFFFFF)
                 val textItem = if (isSelected) Color.White else Color(0xff301F84)
@@ -83,7 +78,7 @@ fun SleepTimeScreen() {
 }
 
 @Composable
-fun ItemTextTime(cardTimeItem : CardTimeItem, modifier: Modifier, color: Color, backgroundColor : Color, onClick : () -> Unit){
+fun ItemTextTime(cardTimeItem : String, modifier: Modifier, color: Color, backgroundColor : Color, onClick : () -> Unit){
     Box(
         modifier = modifier
             .clip(shape = RoundedCornerShape(6.dp)).shadow(6.dp)
@@ -92,8 +87,8 @@ fun ItemTextTime(cardTimeItem : CardTimeItem, modifier: Modifier, color: Color, 
             .clickable { onClick() },
     ) {
         Text(
-            modifier = Modifier.align(Alignment.BottomStart).padding(top = 46.dp, start = 16.dp, bottom = 14.dp),
-            text = cardTimeItem.selectedTimeItem,
+            modifier = Modifier.align(Alignment.BottomStart).padding(top = 48.dp, start = 16.dp, bottom = 14.dp),
+            text = cardTimeItem,
             fontWeight = FontWeight.W800,
             letterSpacing = 0.sp,
             fontSize = 15.sp,
