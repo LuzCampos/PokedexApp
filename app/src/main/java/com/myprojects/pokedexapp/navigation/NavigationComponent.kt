@@ -7,10 +7,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.myprojects.pokedexapp.R
 import com.myprojects.pokedexapp.presentation.detailPokemon.PokemonDetail
 import com.myprojects.pokedexapp.presentation.home.HomeScreen
 import com.myprojects.pokedexapp.presentation.home.ListScreen
-import com.myprojects.pokedexapp.presentation.home.type.types
 import com.myprojects.pokedexapp.presentation.onboarding.*
 import com.myprojects.pokedexapp.presentation.viewmodels.DetailViewModel
 import com.myprojects.pokedexapp.presentation.viewmodels.HomeViewModel
@@ -23,21 +23,58 @@ fun NavigationComponent(
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = "sleeptime_screen"
-        //"quemaestroeres_screen"
-            //"list_pokedex_screen"
+        startDestination = "welcome_screen"
     ) {
         // First route : Home
-        composable("sleeptime_screen") {
-            SleepTimeScreen(newState)
-            //WhatTypeOfPokemonMaster(types = types)
-        }
-        composable("quemaestroeres_screen") {
-            QueMaestroEres(navController = navHostController)
-            //WhatTypeOfPokemonMaster(types = types)
-        }
         composable("onboarding_screen") {
             OnBoardingScreen(navController = navHostController, homeViewModel)
+        }
+        composable("welcome_screen") {
+            WelcomeScreen(state = welcomeState, navigateTo = {
+                navHostController.navigate("notification_screen")
+            })
+        }
+        composable("notification_screen") {
+            WeeklyNotificationsScreen(state = pokemonOdyssey){
+                navHostController.navigate("notification_screen_two")
+            }
+        }
+        composable("notification_screen_two") {
+            WeeklyNotificationsScreen(state = mewsenigmaticbirth) {
+                navHostController.navigate("user_rating_screen")
+                //("question_screen_type")
+
+            }
+        }
+        composable("question_screen_type") {
+            QuestionSectionScreen(state = pokemontyp){
+                navHostController.navigate("question_screen_abilitie")
+            }
+        }
+        composable("question_screen_abilitie") {
+            QuestionSectionScreen(state = pokemonabilitie){
+                navHostController.navigate("question_screen_region")
+            }
+        }
+        composable("question_screen_region") {
+            QuestionSectionScreen(state = pokemonregion){
+                navHostController.navigate("question_screen_rarity")
+            }
+        }
+        composable("question_screen_rarity") {
+            QuestionSectionScreen(state = pokemonrarity){
+                navHostController.navigate("question_screen_games")
+            }
+        }
+        composable("question_screen_games") {
+            QuestionSectionScreen(pokemongames){
+                navHostController.navigate("user_rating_screen")
+            }
+        }
+        composable("user_rating_screen") {
+            UserRatingScreen(flamegoldgnome) {
+                navHostController.navigate("list_pokedex_screen")
+            }
         }
         composable("home_screen") {
             HomeScreen(navController = navHostController, homeViewModel )

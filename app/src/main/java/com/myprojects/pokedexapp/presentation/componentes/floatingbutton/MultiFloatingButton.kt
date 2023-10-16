@@ -31,7 +31,7 @@ fun MultiFloatingButton(
     onClick2:()->Unit,
     onClick3:()->Unit,
 ){
-    Column (horizontalAlignment = Alignment.End) {
+    Column (horizontalAlignment = Alignment.End, modifier = Modifier.padding(bottom = 20.dp)) {
         if (multiFloatingState == MultiFloatingState.Expanded){
             items.forEach { 
                 Filteritems(fabItem = it,
