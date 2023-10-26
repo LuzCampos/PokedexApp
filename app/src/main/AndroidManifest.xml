@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <application
-        android:name="com.myprojects.pokedex.PokedexApplication"
+        android:name="com.agileapps.pokedex.PokedexApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,7 +15,7 @@
         android:theme="@style/Theme.PokedexApp"
         tools:targetApi="31">
         <activity
-            android:name="com.myprojects.pokedex.MainActivity"
+            android:name="com.agileapps.pokedex.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize"
@@ -32,7 +32,7 @@
         </activity>
 
 
-        <receiver android:name="com.myprojects.pokedex.presentation.glance.AppWidgetReceiver"
+        <receiver android:name="com.agileapps.pokedex.presentation.glance.AppWidgetReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
