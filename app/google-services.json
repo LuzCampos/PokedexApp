@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1061707511650:android:60a5a927ce28f8889c5e3b",
+        "mobilesdk_app_id": "1:1061707511650:android:7a9fbe87989191d69c5e3b",
         "android_client_info": {
-          "package_name": "com.myprojects.pokedexapp"
+          "package_name": "com.agileapps.pokedex"
         }
       },
       "oauth_client": [],
