@@ -67,7 +67,7 @@ fun EvolutionRow(pokemonui: PokemonUi, pokemonuiAdd:PokemonUi){
 }
 
 @Composable
-fun Evolution(idImg:Int, evochain : String){
+fun Evolution(idImg:Int, pokemonName : String){
     val isSystemInDarkTheme = isSystemInDarkTheme()
 
     val backgroundColor = if (isSystemInDarkTheme) {
@@ -81,7 +81,7 @@ fun Evolution(idImg:Int, evochain : String){
             Image(
                 modifier = Modifier.height(100.dp),
                 painter = painterResource(id = R.drawable.pokeballbackground),
-                contentDescription = "",
+                contentDescription = pokemonName,
                 colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onPrimary.copy(0.09f))
             )
             Image(
@@ -93,7 +93,7 @@ fun Evolution(idImg:Int, evochain : String){
         Text(
             modifier = Modifier
                 .weight(1f) ,
-            text = evochain,
+            text = pokemonName,
             color = Color(0xff303943),
             fontSize = 14.sp,
             fontFamily = FontFamily(Font(R.font.circularstdbook))
