@@ -58,7 +58,7 @@ fun PokemonImage(
 fun PokeballImage(modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(R.drawable.pokeball),
-        contentDescription = "Pokeball Shadow",
+        contentDescription = null,
         modifier = modifier.size(width = 88.dp, height = 76.dp),
     )
 }
