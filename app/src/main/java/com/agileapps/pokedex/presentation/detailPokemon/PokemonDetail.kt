@@ -109,7 +109,7 @@ fun Contenido(pokemon : PokemonEntity, pokemonEvo0: PokemonEntity?, pokemonEvo2:
 
     val sheetPeekHeight: Dp = screenHeightDp * fraction// Your desired fraction (e.g., 60%)
 
-    var isDarkTheme by remember { mutableStateOf(true) }
+    var isDarkTheme by remember { mutableStateOf(isSystemInDarkTheme) }
     val icon = if(isDarkTheme) {R.drawable.iconday} else {R.drawable.iconnight}
 
     PokedexAppTheme(
