@@ -81,12 +81,12 @@ fun Evolution(idImg:Int, pokemonName : String){
             Image(
                 modifier = Modifier.height(100.dp),
                 painter = painterResource(id = R.drawable.pokeballbackground),
-                contentDescription = pokemonName,
+                contentDescription = "",
                 colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onPrimary.copy(0.09f))
             )
             Image(
                 modifier = Modifier.size(60.dp),
-                painter = painterResource(idImg), contentDescription = ""
+                painter = painterResource(idImg), contentDescription = pokemonName
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
