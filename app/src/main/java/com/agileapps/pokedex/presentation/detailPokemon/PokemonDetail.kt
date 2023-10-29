@@ -374,7 +374,7 @@ private fun PokemonImage(pokemon: PokemonUi, color: Color) {
             modifier = Modifier.size(150.dp),
             painter = painterResource(id = pokemon.pokemonDrawableResourceId),
             alpha = 1.0f,
-            contentDescription = ""
+            contentDescription = pokemon.english_name
         )
     }
 }
