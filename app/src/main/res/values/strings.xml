@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pokedex</string>
+    <string name="app_name">NiceDex</string>
     <string name="msg_try_again">Try again</string>
     <string name="msg_error_generic">Oops! An error happened</string>
     <string name="msg_empty_pokedex">No pokemons yet.</string>
