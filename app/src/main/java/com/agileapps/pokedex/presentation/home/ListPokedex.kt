@@ -1,6 +1,7 @@
 package com.agileapps.pokedex.presentation.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -9,7 +10,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -36,34 +36,37 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ListScreen( navController: NavController, homeViewModel: HomeViewModel = hiltViewModel()){
+fun ListScreen( navController: NavController, homeViewModel: HomeViewModel = hiltViewModel(),isDarkTheme : Boolean,){
 
     var multiFloatingState by remember { mutableStateOf(MultiFloatingState.Collapsed) }
-
-    val context = LocalContext.current
-
     val searchText = remember { mutableStateOf("") }
-
-    var currentBottomSheet: BottomSheetType? by remember{ mutableStateOf(null) }
-
-    val modalBottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
 
     val scope = rememberCoroutineScope()
 
-    val closeSheet = { scope.launch { modalBottomSheetState.hide() } }
+    val backgroundColor = if (isDarkTheme) Color(0xff121212) else Color.Transparent
 
-    val openSheet = { scope.launch { modalBottomSheetState.show() } }
+    val backgroundColorPokeball = if (isDarkTheme) Color(0xffFFFFFF) else Color(0xff303943)
 
     val pokemonesLista: List<PokemonEntity> by homeViewModel.pokemonesLista.observeAsState(initial = listOf())
+
+    val modalBottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+
+    val closeSheet = { scope.launch { modalBottomSheetState.hide() } }
+    val openSheet = { scope.launch { modalBottomSheetState.show() } }
+
+    var currentBottomSheet: BottomSheetType? by remember{ mutableStateOf(null) }
 
     ModalBottomSheetLayout(
         modifier = Modifier
             .fillMaxSize()
-            .defaultMinSize(minHeight = 200.dp),
+            .fillMaxHeight(0.6f),
+        //.defaultMinSize(minHeight = 200.dp),
         sheetState = modalBottomSheetState,
         sheetShape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
         sheetContent = {
-            Spacer(modifier = Modifier.height(1.dp))
+            Spacer(modifier = Modifier
+                .height(1.dp)
+                .background(backgroundColor))
             currentBottomSheet?.let {
                 SheetLayout(
                     bottomSheetType = it,
@@ -72,20 +75,25 @@ fun ListScreen( navController: NavController, homeViewModel: HomeViewModel = hil
                     generation = generations,
                     type = types,
                     modifier = Modifier
+                        .fillMaxWidth()
+                        .background(backgroundColor)
                         .padding(horizontal = 26.dp)
-                        .padding(top = 30.dp, bottom = 13.dp)
+                        .padding(top = 30.dp, bottom = 13.dp),
+                    closeSheet = { closeSheet() }
                 )
             }
         }
     ){
-        Box (modifier = Modifier.fillMaxWidth())
+        Box (modifier = Modifier
+            .fillMaxWidth()
+            .background(backgroundColor))
         {
-            PokeBallBackground()
+
             Scaffold(
+                backgroundColor = backgroundColor,
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .padding(horizontal = 8.dp),
-                backgroundColor = Color.Transparent,
                 topBar = {
                     CustomAppBar(onClick = {//homeViewModel.getPokemons()
                         navController.popBackStack()}, tint = Color(0xff303943) )
@@ -98,19 +106,10 @@ fun ListScreen( navController: NavController, homeViewModel: HomeViewModel = hil
                             multiFloatingState = it
                         },
                         items = items,
-                        context = context,
-                        onClick1 = {
-                            currentBottomSheet = BottomSheetType.TYPE1
+                        onClick = { selectedBottomSheetType ->
+                            currentBottomSheet = selectedBottomSheetType
                             openSheet()
-                        },
-                        onClick2 = {
-                            currentBottomSheet = BottomSheetType.TYPE2
-                            openSheet()
-                        },
-                        onClick3 = {
-                            currentBottomSheet = BottomSheetType.TYPE3
-                            openSheet()
-                        },
+                        }
                     )
                 },
                 content = {
@@ -121,9 +120,11 @@ fun ListScreen( navController: NavController, homeViewModel: HomeViewModel = hil
                     )
                 }
             )
+            PokeBallBackground(backgroundColorPokeball)
         }
     }
 }
+
 
 @Composable
 fun PokedexSuccess(pokemons: List<PokemonEntity>, modifier: Modifier = Modifier,navController: NavController) {

@@ -13,16 +13,16 @@ val items = listOf(
     FabItem(
         icon = R.drawable.searchicon,
         label = "Search Pokemon",
-        identifier = BottomSheetType.TYPE1.name
+        identifier = BottomSheetType.SEARCH.name
     ),
     FabItem(
         icon = R.drawable.pokeballicon,
         label = "All Type",
-        identifier = BottomSheetType.TYPE2.name
+        identifier = BottomSheetType.TYPE.name
     ),
     FabItem(
         icon = R.drawable.pokeballicon,
         label = "All Gen",
-        identifier = BottomSheetType.TYPE3.name
+        identifier = BottomSheetType.GENERATION.name
     )
 )

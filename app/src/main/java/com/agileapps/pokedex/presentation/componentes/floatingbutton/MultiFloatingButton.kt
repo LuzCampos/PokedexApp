@@ -1,15 +1,10 @@
 package com.agileapps.pokedex.presentation.componentes.floatingbutton
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,31 +20,16 @@ import com.agileapps.pokedex.presentation.componentes.modalbottomsheet.BottomShe
 fun MultiFloatingButton(
     multiFloatingState: MultiFloatingState,
     onMultiFabStateChange:(MultiFloatingState) -> Unit,
-    context: Context,
     items: List<FabItem>,
-    onClick1: () -> Unit,
-    onClick2:()->Unit,
-    onClick3:()->Unit,
+    onClick: (BottomSheetType) -> Unit,
 ){
     Column (horizontalAlignment = Alignment.End, modifier = Modifier.padding(bottom = 20.dp)) {
         if (multiFloatingState == MultiFloatingState.Expanded){
-            items.forEach { 
+            items.forEach {
                 Filteritems(fabItem = it,
                     onFabItemClick = { fabItem ->
-                           when(fabItem.identifier){
-                               BottomSheetType.TYPE1.name -> {
-                                   Toast.makeText(context, "FAVORITES",Toast.LENGTH_SHORT).show()
-                                   onClick1()
-                               }
-                               BottomSheetType.TYPE2.name -> {
-                                   Toast.makeText(context, "TYPES",Toast.LENGTH_SHORT).show()
-                                    onClick2()
-                               }
-                               BottomSheetType.TYPE3.name -> {
-                                   Toast.makeText(context, "GENERATION",Toast.LENGTH_SHORT).show()
-                                   onClick3()
-                               }
-                           }
+                        val bottomSheetType = BottomSheetType.valueOf(fabItem.identifier)
+                        onClick(bottomSheetType)
                     }
                 )
                 Spacer(modifier = Modifier.size(10.dp))
@@ -72,14 +52,14 @@ fun MultiFloatingButton(
                 MultiFloatingState.Collapsed -> Icon(
                     painter = painterResource(id = R.drawable.filter),
                     contentDescription = "",
-                    tint = Color.White,
+                    tint = MaterialTheme.colors.primaryVariant,
                     modifier = Modifier.size(22.dp)
                 )
                 MultiFloatingState.Expanded ->
                     Icon(
                         painter = painterResource(id = R.drawable.x),
                         contentDescription = "",
-                        tint = Color.White,
+                        tint = MaterialTheme.colors.primaryVariant,
                         modifier = Modifier.size(16.dp)
                     )
             }
@@ -91,17 +71,17 @@ fun MultiFloatingButton(
 fun Filteritems(
     fabItem: FabItem,
     onFabItemClick: (FabItem) -> Unit
-    ){
+){
     Card(
         elevation = 10.dp,
         shape = RoundedCornerShape(40.dp),
-        backgroundColor = Color.White,
+        backgroundColor = MaterialTheme.colors.primaryVariant,
         modifier = Modifier.clickable {
             onFabItemClick.invoke(fabItem)
         }
     ) {
         Row(modifier = Modifier.padding(horizontal = 18.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Text(text = fabItem.label, color = Color(0xff303943))
+            Text(text = fabItem.label, color = MaterialTheme.colors.onSecondary)
             Spacer(modifier = Modifier.size(12.dp))
             Image(
                 ImageBitmap.imageResource(fabItem.icon),

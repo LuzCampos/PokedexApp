@@ -51,7 +51,9 @@ fun PokemonDetail(
     evochain_2: String?,
     evochain_4: String?,
     detailViewModel: DetailViewModel = hiltViewModel(),
-    navController: NavController
+    navController: NavController,
+    isDarkTheme : Boolean,
+    onClick : () -> Unit
 ) {
     val pokemonTranslator = remember {
         PokemonTranslator()
@@ -64,13 +66,13 @@ fun PokemonDetail(
     val addEvo0Pokemon = detailViewModel.pokemonEvo0.observeAsState().value
     val addEvo2Pokemon = detailViewModel.pokemonEvo2.observeAsState().value
     val addEvo4Pokemon = detailViewModel.pokemonEvo4.observeAsState().value
-    if (selectedPokemon != null) Contenido(selectedPokemon, addEvo0Pokemon, addEvo2Pokemon, addEvo4Pokemon, pokemonTranslator = pokemonTranslator, navController)
+    if (selectedPokemon != null) Contenido(selectedPokemon, addEvo0Pokemon, addEvo2Pokemon, addEvo4Pokemon, pokemonTranslator = pokemonTranslator, navController, isDarkTheme, onClick)
     
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun Contenido(pokemon : PokemonEntity, pokemonEvo0: PokemonEntity?, pokemonEvo2: PokemonEntity?, pokemonEvo4 : PokemonEntity?, pokemonTranslator: PokemonTranslator, navController: NavController){
+fun Contenido(pokemon : PokemonEntity, pokemonEvo0: PokemonEntity?, pokemonEvo2: PokemonEntity?, pokemonEvo4 : PokemonEntity?, pokemonTranslator: PokemonTranslator, navController: NavController,isDarkTheme: Boolean, onClick : () -> Unit ){
 
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
     val pokemonUi = pokemonTranslator.domainToUi(pokemon)
@@ -87,29 +89,21 @@ fun Contenido(pokemon : PokemonEntity, pokemonEvo0: PokemonEntity?, pokemonEvo2:
         }
     }
 
-    // Función para reanudar la animación cuando vuelves a esta pantalla
     fun resumeAnimation() {
         isAnimationRunning = true
     }
 
-    val fraction = 0.63f // Your desired fraction (e.g., 60%)
-    val screenHeightDp: Dp = with(LocalDensity.current) { // Get the screen height in DP
+    val fraction = 0.63f
+    val screenHeightDp: Dp = with(LocalDensity.current) {
         LocalConfiguration.current.screenHeightDp.dp
     }
 
     val isSystemInDarkTheme = isSystemInDarkTheme()
 
-    fun themesColor(colorDay: Color, colorNight:Color){
-        if(isSystemInDarkTheme) { colorNight } else { colorDay }
-    }
-
     val pokeballColor = if(isSystemInDarkTheme) { Color.Transparent } else { Color(0xffFFFFFF) }
 
+    val sheetPeekHeight: Dp = screenHeightDp * fraction
 
-
-    val sheetPeekHeight: Dp = screenHeightDp * fraction// Your desired fraction (e.g., 60%)
-
-    var isDarkTheme by remember { mutableStateOf(isSystemInDarkTheme) }
     val icon = if(isDarkTheme) {R.drawable.iconday} else {R.drawable.iconnight}
 
     PokedexAppTheme(
@@ -148,7 +142,7 @@ fun Contenido(pokemon : PokemonEntity, pokemonEvo0: PokemonEntity?, pokemonEvo2:
                             }
                         },
                         actions = {
-                            IconButton(modifier = Modifier.size(26.dp),onClick = { isDarkTheme = !isDarkTheme }) {
+                            IconButton(modifier = Modifier.size(26.dp),onClick = { onClick() }) {
                                 Icon(
                                     painter = painterResource(id = icon),
                                     tint = MaterialTheme.colors.primaryVariant,
@@ -230,7 +224,7 @@ private fun BoxScope.HeaderLeft(pokemonui: PokemonUi) {
             .padding(top = 82.dp, start = 32.dp)
             .height(68.dp),
 
-    ){
+        ){
         Text(
             modifier = Modifier.align(Alignment.Start),
             text = pokemonui.english_name,
@@ -242,8 +236,8 @@ private fun BoxScope.HeaderLeft(pokemonui: PokemonUi) {
         )
         Spacer(modifier = Modifier.height(6.dp))
         Row {
-           PowerChip(text = pokemonui.primary_type)
-           Spacer(modifier = Modifier.width(6.dp))
+            PowerChip(text = pokemonui.primary_type)
+            Spacer(modifier = Modifier.width(6.dp))
             if (pokemonui.secondary_type.isNotEmpty()) PowerChip(text = pokemonui.secondary_type)
         }
     }
@@ -374,7 +368,7 @@ private fun PokemonImage(pokemon: PokemonUi, color: Color) {
             modifier = Modifier.size(150.dp),
             painter = painterResource(id = pokemon.pokemonDrawableResourceId),
             alpha = 1.0f,
-            contentDescription = pokemon.english_name
+            contentDescription = ""
         )
     }
 }

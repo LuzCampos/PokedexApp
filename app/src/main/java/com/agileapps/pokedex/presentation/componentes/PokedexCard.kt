@@ -22,7 +22,7 @@ import java.util.*
 fun PokemonCard(pokemonUi: PokemonUi, onClickCard: () -> Unit) {
     Card(
         shape = RoundedCornerShape(24.dp),
-        contentColor = Color.White,
+        contentColor = MaterialTheme.colors.primaryVariant,
         elevation = 10.dp,
         backgroundColor = Color(pokemonUi.backgroundColorValue)
     )
@@ -36,7 +36,7 @@ fun PokemonCard(pokemonUi: PokemonUi, onClickCard: () -> Unit) {
             PokemonImage(pokemonUi.pokemonDrawableResourceId, Modifier.align(Alignment.BottomEnd).padding(end = 10.dp, bottom = 10.dp))
             Text(
                 text = pokemonUi.getNumberFormatted(),
-                color = Color.Black.copy(.2f),
+                color = MaterialTheme.colors.secondaryVariant,
                 modifier = Modifier
                     .padding(top = 8.dp, end = 16.dp)
                     .align(Alignment.TopEnd),
@@ -44,7 +44,7 @@ fun PokemonCard(pokemonUi: PokemonUi, onClickCard: () -> Unit) {
             )
             Column(
                 modifier = Modifier
-                 //   .align(Alignment.Cen)
+                    //   .align(Alignment.Cen)
                     .padding(start = 18.dp, top = 24.dp)
             ) {
                 Text(
@@ -71,11 +71,11 @@ fun PowerChip(text: String, modifier: Modifier = Modifier) {
                 Locale.ROOT
             ) else it.toString()
         },
-        color = Color.White,
+        color =MaterialTheme.colors.primaryVariant,
         style = MaterialTheme.typography.overline,
         modifier = modifier
             .background(
-                color = Color.White.copy(alpha = .15f), shape = RoundedCornerShape(20.dp)
+                color = MaterialTheme.colors.primaryVariant.copy(alpha = .15f), shape = RoundedCornerShape(20.dp)
             )
             .padding(horizontal = 12.dp, vertical = 4.dp),
     )

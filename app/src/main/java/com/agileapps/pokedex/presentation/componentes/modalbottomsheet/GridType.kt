@@ -12,26 +12,26 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.ImageLoader
-import coil.compose.rememberAsyncImagePainter
-import coil.decode.SvgDecoder
+import com.agileapps.pokedex.R
 import com.agileapps.pokedex.presentation.componentes.modalbottomsheet.generation.header
 import com.agileapps.pokedex.presentation.home.type.Type
 import com.agileapps.pokedex.presentation.viewmodels.HomeViewModel
 
 @Composable
-fun AllType(types: List<Type>, homeViewModel: HomeViewModel) {
+fun GridType(types: List<Type>, homeViewModel: HomeViewModel,OnCloseSheet : () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(440.dp)
-            .background(Color.White)
+            //.height(440.dp)
+            .fillMaxHeight(0.7f)
+            .background(MaterialTheme.colors.primaryVariant)
     ) {
         LazyVerticalGrid(
             modifier = Modifier
@@ -45,6 +45,7 @@ fun AllType(types: List<Type>, homeViewModel: HomeViewModel) {
                 Text(
                     text = "Types",
                     textAlign = TextAlign.Center,
+                    fontFamily = FontFamily(Font(R.font.circularstdbold)),
                     style = MaterialTheme.typography.h5.copy(
                         fontWeight =
                         FontWeight.ExtraBold
@@ -55,25 +56,21 @@ fun AllType(types: List<Type>, homeViewModel: HomeViewModel) {
             items(types.size){
                     index ->
                 val type = types[index]
-                CardType(type = type, homeViewModel = homeViewModel)
+                CardType(type = type, homeViewModel = homeViewModel,OnCloseSheet = OnCloseSheet)
             }
         }
     }
 }
 
 @Composable
-private fun CardType(type: Type,homeViewModel: HomeViewModel){
-    val imageLoader = ImageLoader.Builder(LocalContext.current)
-        .components {
-            add(SvgDecoder.Factory())
-        }
-        .build()
+private fun CardType(type: Type,homeViewModel: HomeViewModel,OnCloseSheet : () -> Unit){
 
     Card(
         modifier = Modifier
             .height(120.dp)
             .clickable {
                 homeViewModel.getPokemonByType(type.type)
+                OnCloseSheet()
             },
         shape = RoundedCornerShape(20.dp),
         backgroundColor = type.color,
@@ -86,12 +83,13 @@ private fun CardType(type: Type,homeViewModel: HomeViewModel){
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-               Image(
-                   painter = rememberAsyncImagePainter(type.icon, imageLoader),
-                   colorFilter = ColorFilter.tint(Color.White),
-                   contentDescription = "", modifier = Modifier.size(80.dp)  )
+                Image(
+                    painter = painterResource(id =  type.icon),
+                    colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariant),
+                    contentDescription = "", modifier = Modifier.size(80.dp)  )
             }
         }
     }
 }
+
 

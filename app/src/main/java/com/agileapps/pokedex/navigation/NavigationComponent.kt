@@ -19,6 +19,8 @@ fun NavigationComponent(
     navHostController: NavHostController,
     homeViewModel: HomeViewModel,
     detailViewModel: DetailViewModel,
+    isDarkTheme : Boolean,
+    onClick : () -> Unit
 ) {
     NavHost(
         navController = navHostController,
@@ -82,7 +84,7 @@ fun NavigationComponent(
             CrashScreen()
         }
         composable("list_pokedex_screen") {
-            ListScreen(navController = navHostController, homeViewModel )
+            ListScreen(navController = navHostController, homeViewModel,isDarkTheme)
         }
         composable("detail?national_number={national_number}&evochain_0={evochain_0}&evochain_2={evochain_2}&evochain_4={evochain_4}",
             arguments = listOf(
@@ -109,7 +111,10 @@ fun NavigationComponent(
                 evochain_2 = backStackEntry.arguments?.getString("evochain_2"),
                 evochain_4 = backStackEntry.arguments?.getString("evochain_4"),
                 detailViewModel,
-                navController = navHostController)
+                navController = navHostController,
+                isDarkTheme = isDarkTheme,
+                onClick = onClick
+            )
         }
     }
 }

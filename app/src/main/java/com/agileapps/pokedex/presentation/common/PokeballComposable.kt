@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.agileapps.pokedex.R
 
 @Composable
-fun BoxScope.PokeBallBackground(){
+fun BoxScope.PokeBallBackground(color: Color){
     Box(
         modifier = Modifier
             .align(Alignment.TopEnd)
@@ -26,18 +26,9 @@ fun BoxScope.PokeBallBackground(){
             modifier = Modifier.size(274.dp).align(Alignment.TopEnd),
             painter = painterResource(R.drawable.pokeballbackground),
             contentDescription = "Pokeball Shadow",
-            colorFilter = ColorFilter.tint(color = Color(0xff303943).copy(0.06f))
+            colorFilter = ColorFilter.tint(color = color.copy(0.06f))
         )
     }
-}
-
-@Composable
-fun PokeballImageCard(modifier: Modifier = Modifier) {
-    Image(
-        painter = painterResource(R.drawable.pokedexcard),
-        contentDescription = "Pokeball Shadow",
-        modifier = modifier.size(width = 88.dp, height = 76.dp),
-    )
 }
 
 @Composable

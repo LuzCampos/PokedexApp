@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.agileapps.pokedex.R
-import com.agileapps.pokedex.presentation.common.PokeBallBackground
 import com.agileapps.pokedex.presentation.common.SearchComponent
 import com.agileapps.pokedex.presentation.common.TitleHeader
 import com.agileapps.pokedex.presentation.home.news.PokemonNews
@@ -51,7 +50,7 @@ fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel = hilt
             TypeGrid(types = types, homeViewModel = homeViewModel, navController )
             PokemonNews()
         }
-        PokeBallBackground()
+       // PokeBallBackground()
     }
 }
 
