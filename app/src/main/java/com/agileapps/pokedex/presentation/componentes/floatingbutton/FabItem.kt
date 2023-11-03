@@ -11,11 +11,6 @@ class FabItem(
 
 val items = listOf(
     FabItem(
-        icon = R.drawable.searchicon,
-        label = "Search Pokemon",
-        identifier = BottomSheetType.SEARCH.name
-    ),
-    FabItem(
         icon = R.drawable.pokeballicon,
         label = "All Type",
         identifier = BottomSheetType.TYPE.name

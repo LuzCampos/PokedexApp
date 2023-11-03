@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            var isDarkTheme by remember { mutableStateOf(true) }
+            var isDarkTheme by remember { mutableStateOf(false) }
             PokedexAppTheme(isDarkTheme) {
                 NavigationComponent(navHostController = rememberNavController(), homeViewModel,detailViewModel,isDarkTheme) {
                     isDarkTheme = !isDarkTheme

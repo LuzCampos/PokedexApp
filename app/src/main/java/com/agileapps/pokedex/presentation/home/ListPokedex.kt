@@ -22,6 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.agileapps.pokedex.data.PokemonEntity
 import com.agileapps.pokedex.presentation.common.CustomAppBar
 import com.agileapps.pokedex.presentation.common.PokeBallBackground
+import com.agileapps.pokedex.presentation.common.SearchComponent
 import com.agileapps.pokedex.presentation.componentes.PokedexGrid
 import com.agileapps.pokedex.presentation.componentes.floatingbutton.MultiFloatingButton
 import com.agileapps.pokedex.presentation.componentes.floatingbutton.MultiFloatingState
@@ -36,7 +37,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ListScreen( navController: NavController, homeViewModel: HomeViewModel = hiltViewModel(),isDarkTheme : Boolean,){
+fun ListScreen(navController: NavController, homeViewModel: HomeViewModel = hiltViewModel(),isDarkTheme : Boolean){
 
     var multiFloatingState by remember { mutableStateOf(MultiFloatingState.Collapsed) }
     val searchText = remember { mutableStateOf("") }
@@ -88,15 +89,16 @@ fun ListScreen( navController: NavController, homeViewModel: HomeViewModel = hil
             .fillMaxWidth()
             .background(backgroundColor))
         {
-
             Scaffold(
                 backgroundColor = backgroundColor,
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .padding(horizontal = 8.dp),
                 topBar = {
-                    CustomAppBar(onClick = {//homeViewModel.getPokemons()
-                        navController.popBackStack()}, tint = Color(0xff303943) )
+                    CustomAppBar(onClick = {homeViewModel.getPokemons()
+                        //navController.popBackStack()
+                        },
+                        tint = MaterialTheme.colors.onSecondary )
                 },
                 floatingActionButton =
                 {
@@ -113,11 +115,23 @@ fun ListScreen( navController: NavController, homeViewModel: HomeViewModel = hil
                     )
                 },
                 content = {
-                    PokedexGrid(
-                        pokemonesLista = pokemonesLista,
-                        modifier = Modifier.padding(it),
-                        navController = navController
-                    )
+                    Column(modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(it)
+                    ) {
+                            SearchComponent(searchText = searchText, homeViewModel = homeViewModel ,
+                                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp).padding(bottom = 20.dp)
+                                    //.height(50.dp)
+                            )
+                        PokedexGrid(
+                            pokemonesLista = pokemonesLista,
+                            modifier = Modifier.fillMaxWidth().padding(it)
+                            //.height(200.dp)
+                            ,
+                            navController = navController
+                        )
+
+                    }
                 }
             )
             PokeBallBackground(backgroundColorPokeball)
