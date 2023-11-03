@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,7 +29,10 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            var isDarkTheme by remember { mutableStateOf(false) }
+
+            val isSystemInDarkTheme = isSystemInDarkTheme()
+
+            var isDarkTheme by remember { mutableStateOf(isSystemInDarkTheme) }
             PokedexAppTheme(isDarkTheme) {
                 NavigationComponent(navHostController = rememberNavController(), homeViewModel,detailViewModel,isDarkTheme) {
                     isDarkTheme = !isDarkTheme
