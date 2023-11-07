@@ -17,6 +17,7 @@ import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -29,23 +30,17 @@ fun WeeklyNotificationsScreen(state: WeeklyNotificationsScreenState,navigateTo: 
     val backgroundColorInside = state.backgroundColorInside
     val backgroundColorOutside = state.backgroundColorOutside
     val imageScreen = state.imageScreen
-    val toprightText = state.toprightText
-    val bottomleftIcon = state.bottomleftIcon
+    val topRightText = state.topRightText
+    val bottomLeftIcon = state.bottomLeftIcon
     val title = state.title
     val content = state.content
     val topBottomFade = Brush.verticalGradient(0.6f to Color.Red, 1f to Color.Transparent)
-    println(content.length)
 
     val largeRadialGradient = object : ShaderBrush() {
         override fun createShader(size: Size): Shader {
             val biggerDimension = maxOf(size.height, size.width)
             return RadialGradientShader(
-                colors = listOf(
-                    //Color(0xFF2be4dc),
-                    Color(backgroundColorInside),
-                    Color(backgroundColorOutside),
-                    //Color(0xFF243484)),
-                ),
+                colors = listOf(Color(backgroundColorInside), Color(backgroundColorOutside)),
                 center = size.center,
                 radius = biggerDimension / 2f,
                 colorStops = listOf(0f, 0.95f)
@@ -72,30 +67,30 @@ fun WeeklyNotificationsScreen(state: WeeklyNotificationsScreenState,navigateTo: 
                     .size(170.dp),
                 alignment = Alignment.Center,
                 painter = painterResource(id = imageScreen),
-                contentDescription = "" )
+                contentDescription = "imageScreen" )
             Column(modifier = Modifier.padding(top = 20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = title, color = Color(0xff272822),
+                Text(text = stringResource(id = title), color = Color(0xff272822),
                     fontFamily = FontFamily(Font(R.font.hapticproblack)),
                     fontSize = 34.sp,
                     textAlign = TextAlign.Center,
                     lineHeight = 38.sp
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                if (content.length < 140)
-                    TextContent(Modifier.height(120.dp),title, content)
+                if (stringResource(id = content).length < 140)
+                    TextContent(Modifier.height(120.dp), stringResource(id = title), stringResource(id = content))
                 else TextContent(
                     Modifier
                         .padding(top = 6.dp)
                         .height(140.dp)
-                        .fadingEdge(topBottomFade), title, content)
+                        .fadingEdge(topBottomFade), stringResource(id = title), stringResource(id = content))
                 //Text(text = "$content \uD83D\uDCF2✨.", color = Color(0xff272822), fontFamily = FontFamily(Font(R.font.hapticproregular)), fontSize = 18.sp, lineHeight = 22.sp, textAlign = TextAlign.Justify)
             }
 
         }
         // PokeBallBackground()
-        NumberNotification(toprightText)
+        NumberNotification(stringResource(id = topRightText))
         //MyButton()
-        CustomButton(bottomleftIcon){
+        CustomButton(bottomLeftIcon){
             navigateTo()
         }
     }
@@ -115,7 +110,7 @@ fun BoxScope.NumberNotification(text:String){
                 .fillMaxSize()
                 .align(Alignment.Center),
             painter = painterResource(R.drawable.pokeballbackground),
-            contentDescription = "Pokeball Shadow",
+            contentDescription = "pokeBallBackground",
             colorFilter = ColorFilter.tint(color = Color(0xff303943).copy(0.06f))
         )
         Text(
@@ -174,7 +169,7 @@ fun BoxScope.CustomButton(leftIcon:Int, onClick : () -> Unit){
                     Icon(
                         modifier = Modifier.size(24.dp),
                         painter = painterResource(id = R.drawable.nexticon),
-                        contentDescription = ""
+                        contentDescription = "nextIcon"
                     )
                 }
             }
@@ -213,39 +208,3 @@ fun Modifier.fadingEdge(brush: Brush) = this
         drawRect(brush = brush, blendMode = BlendMode.DstIn)
     }
 
-@Composable
-fun FadingEdgeExamples() {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-    ) {
-
-        val topFade = Brush.verticalGradient(0f to Color.Transparent, 0.3f to Color.Red)
-        Box(modifier = Modifier
-            .fadingEdge(topFade)
-            .background(Color.Blue)
-            .size(100.dp))
-
-        val topBottomFade = Brush.verticalGradient(0f to Color.Transparent, 0.3f to Color.Red, 0.7f to Color.Red, 1f to Color.Transparent)
-        Box(modifier = Modifier
-            .fadingEdge(topBottomFade)
-            .background(Color(0xffffcccc))
-            .size(100.dp))
-
-        val leftRightFade = Brush.horizontalGradient(0f to Color.Transparent, 0.1f to Color.Red, 0.9f to Color.Red, 1f to Color.Transparent)
-        Box(modifier = Modifier
-            .fadingEdge(leftRightFade)
-            .background(Color.Blue)
-            .size(100.dp))
-
-        val radialFade = Brush.radialGradient(0f to Color.Red, 0.5f to Color.Transparent)
-        Box(modifier = Modifier
-            .fadingEdge(radialFade)
-            .background(Color.Blue)
-            .size(100.dp))
-
-            }
-        }

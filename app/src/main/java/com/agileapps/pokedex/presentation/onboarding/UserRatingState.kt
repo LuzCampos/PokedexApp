@@ -5,19 +5,17 @@ import androidx.annotation.DrawableRes
 import com.agileapps.pokedex.R
 
 data class UserRatingState(
-    val name:String,
+    val name:Int,
     @ColorLong val backgroundColor: Long,
     @DrawableRes val backgroundResourceId: Int,
-    val type:String,
+    val type:Int,
     val punctuation:Double,
-    val titleimg:String,
-    val winrate :Int,
-    val navigateTo: (String) -> Unit
+    val titleImg:Int,
+    val winRate :Int
 )
 
-val flamegoldgnome = UserRatingState(
-    name = "Mystic\nMaster", backgroundColor = 0xff0079FF, backgroundResourceId = R.drawable.mystic,
-    type = "You are drawn to the mystical side of Pokémon. Legends, ancient runes, and psychic abilities fascinate you.",
-    punctuation = 9.8, titleimg = "Afinity rate", winrate = 92,
-    navigateTo = {
-    } )
+val mysticMaster = UserRatingState(
+    name = R.string.msg_name_mysticMaster, backgroundColor = 0xff0079FF, backgroundResourceId = R.drawable.mystic,
+    type = R.string.msg_type_mysticMaster,
+    punctuation = 9.8, titleImg = R.string.msg_titleImg_mysticMaster, winRate = 92,
+)

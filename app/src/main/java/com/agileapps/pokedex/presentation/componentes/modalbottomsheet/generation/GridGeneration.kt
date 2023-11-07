@@ -31,7 +31,6 @@ fun GridGeneration(generation: List<Generation>, homeViewModel: HomeViewModel, c
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(0.7f)
-            //.height(574.dp)
             .background(MaterialTheme.colors.primaryVariant)
     ) {
         LazyVerticalGrid(
@@ -87,7 +86,7 @@ private fun CardGeneration(generation: Generation,homeViewModel: HomeViewModel,c
                     fontSize = 14.sp, modifier = Modifier.padding(vertical = 5.dp))
                 Spacer(modifier = Modifier.height(8.dp))
                 Image(
-                    ImageBitmap.imageResource(id = generation.icon), contentDescription = "",
+                    ImageBitmap.imageResource(id = generation.icon), contentDescription = "generation.icon",
                     modifier = Modifier.size(100.dp)  )
             }
         }

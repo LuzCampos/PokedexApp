@@ -27,9 +27,6 @@ fun NavigationComponent(
         startDestination = "list_pokedex_screen"
     ) {
         // First route : Home
-        composable("onboarding_screen") {
-            OnBoardingScreen(navController = navHostController, homeViewModel)
-        }
         composable("welcome_screen") {
             WelcomeScreen(state = welcomeState, navigateTo = {
                 navHostController.navigate("notification_screen")
@@ -41,39 +38,39 @@ fun NavigationComponent(
             }
         }
         composable("notification_screen_two") {
-            WeeklyNotificationsScreen(state = mewsenigmaticbirth) {
+            WeeklyNotificationsScreen(state = mewsEnigmaticBirth) {
                 navHostController.navigate("user_rating_screen")
                 //("question_screen_type")
 
             }
         }
         composable("question_screen_type") {
-            QuestionSectionScreen(state = pokemontyp){
+            QuestionSectionScreen(state = pokemonTypes){
                 navHostController.navigate("question_screen_abilitie")
             }
         }
         composable("question_screen_abilitie") {
-            QuestionSectionScreen(state = pokemonabilitie){
+            QuestionSectionScreen(state = pokemonAbilities){
                 navHostController.navigate("question_screen_region")
             }
         }
         composable("question_screen_region") {
-            QuestionSectionScreen(state = pokemonregion){
+            QuestionSectionScreen(state = pokemonRegion){
                 navHostController.navigate("question_screen_rarity")
             }
         }
         composable("question_screen_rarity") {
-            QuestionSectionScreen(state = pokemonrarity){
+            QuestionSectionScreen(state = pokemonRarity){
                 navHostController.navigate("question_screen_games")
             }
         }
         composable("question_screen_games") {
-            QuestionSectionScreen(pokemongames){
+            QuestionSectionScreen(pokemonGames){
                 navHostController.navigate("user_rating_screen")
             }
         }
         composable("user_rating_screen") {
-            UserRatingScreen(flamegoldgnome) {
+            UserRatingScreen(mysticMaster) {
                 navHostController.navigate("list_pokedex_screen")
             }
         }

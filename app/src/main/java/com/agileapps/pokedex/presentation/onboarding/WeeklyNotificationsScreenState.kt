@@ -8,33 +8,29 @@ data class WeeklyNotificationsScreenState(
     @ColorLong val backgroundColorInside : Long,
     @ColorLong val backgroundColorOutside : Long,
     @DrawableRes val imageScreen : Int,
-    @DrawableRes val topleftIcon : Int,
-    val toprightText : String,
-    @DrawableRes val bottomleftIcon : Int,
-    val title : String,
-    val content : String
+    @DrawableRes val topLeftIcon : Int,
+    val topRightText : Int,
+    @DrawableRes val bottomLeftIcon : Int,
+    val title : Int,
+    val content : Int
 )
 
 val pokemonOdyssey = WeeklyNotificationsScreenState(
-    backgroundColorInside =
-    0xffffc400,
-    //0xffFBFFDC,
+    backgroundColorInside = 0xffffc400,
     backgroundColorOutside = 0xffffb300,
-    imageScreen = R.drawable.instinct, topleftIcon = R.drawable.pokeballiconapp, toprightText = "001",
-    bottomleftIcon = R.drawable.pointer, title = "Pokemon Odyssey : Weekly Tales",
-    content = "Every week, you'll receive three special push notifications, each packed with exciting and in-depth information about a specific Pokemon" ,
+    imageScreen = R.drawable.instinct, topLeftIcon = R.drawable.pokeballiconapp,
+    topRightText = R.string.msg_toprighttext_pokemonodyssey,
+    bottomLeftIcon = R.drawable.pointer, title = R.string.msg_title_pokemonodyssey,
+    content = R.string.msg_content_pokemonodyssey
 )
 
-val mewsenigmaticbirth = WeeklyNotificationsScreenState(
+val mewsEnigmaticBirth = WeeklyNotificationsScreenState(
     backgroundColorInside = 0xfffccbc7,
     backgroundColorOutside = 0xfffeb1ab,
-    //backgroundColor = 0xffffcccc,
     imageScreen = R.drawable.meow151,
-    topleftIcon = R.drawable.pokeballiconapp,
-    toprightText = "151",
-    bottomleftIcon = R.drawable.pointer,
-    title = "Mew’s\nEnigmatic Birth",
-    content = "In the ancient times, when the universe was still a canvas of cosmic wonders, Mew emerged from the primordial essence of life.\n" +
-           // "A celestial being, Mew possessed the genetic blueprints of every known Pokémon, encapsulating the universe's evolutionary potential within its delicate form.\n" +
-            "Mew wandered the cosmos, seeding life across worlds, and became the symbol of unexplored mysteries." ,
+    topLeftIcon = R.drawable.pokeballiconapp,
+    topRightText = R.string.msg_toprighttext_mewsEnigmaticBirth,
+    bottomLeftIcon = R.drawable.pointer,
+    title = R.string.msg_title_mewsEnigmaticBirth,
+    content = R.string.msg_content_mewsEnigmaticBirth
 )

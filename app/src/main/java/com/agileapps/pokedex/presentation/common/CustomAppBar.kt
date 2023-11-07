@@ -32,7 +32,7 @@ fun CustomAppBar(onClick : () -> Unit, tint : Color) {
                     Icon(
                         Icons.Filled.ArrowBack,
                         tint = tint,
-                        contentDescription = ""
+                        contentDescription = "ArrowBack"
                     )
                 }
             }

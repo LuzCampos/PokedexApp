@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -35,9 +36,7 @@ fun SearchComponent(searchText: MutableState<String>, homeViewModel: HomeViewMod
                 singleLine = true,
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     backgroundColor =
-                    Color.Transparent
-                    //Color(0xffF1F1F1)
-                    ,
+                    Color.Transparent,
                     cursorColor = Color(0xffA4A7AB),
                     focusedBorderColor = MaterialTheme.colors.onSecondary,
                     unfocusedBorderColor = MaterialTheme.colors.onSurface
@@ -54,15 +53,11 @@ fun SearchComponent(searchText: MutableState<String>, homeViewModel: HomeViewMod
                 },
                 modifier = Modifier
                     .fillMaxWidth(),
-                    //.height(48.dp)
-                    //.focusRequester(focusRequester),
                 value = searchText.value,
                 onValueChange = { searchText.value = it; homeViewModel.searchPokemonByName(it) },
                 placeholder = { Text(
-                    "Search Pokemon, Move, Ability etc",
-                    color = MaterialTheme.colors.background
-                    //Color(0xffA4A7AB)
-                    ,
+                    stringResource(id = R.string.msg_placeholder_searchcomponent),
+                    color = MaterialTheme.colors.background,
                     fontSize = 12.sp,
                     fontFamily = FontFamily(Font(R.font.circularstdbook)),
                 ) },

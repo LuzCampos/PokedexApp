@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +30,6 @@ fun GridType(types: List<Type>, homeViewModel: HomeViewModel,OnCloseSheet : () -
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            //.height(440.dp)
             .fillMaxHeight(0.7f)
             .background(MaterialTheme.colors.primaryVariant)
     ) {
@@ -43,7 +43,7 @@ fun GridType(types: List<Type>, homeViewModel: HomeViewModel,OnCloseSheet : () -
         ) {
             header {
                 Text(
-                    text = "Types",
+                    text = stringResource(id = R.string.msg_fabItem_types),
                     textAlign = TextAlign.Center,
                     fontFamily = FontFamily(Font(R.font.circularstdbold)),
                     style = MaterialTheme.typography.h5.copy(
@@ -64,7 +64,6 @@ fun GridType(types: List<Type>, homeViewModel: HomeViewModel,OnCloseSheet : () -
 
 @Composable
 private fun CardType(type: Type,homeViewModel: HomeViewModel,OnCloseSheet : () -> Unit){
-
     Card(
         modifier = Modifier
             .height(120.dp)
@@ -86,7 +85,7 @@ private fun CardType(type: Type,homeViewModel: HomeViewModel,OnCloseSheet : () -
                 Image(
                     painter = painterResource(id =  type.icon),
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.primaryVariant),
-                    contentDescription = "", modifier = Modifier.size(80.dp)  )
+                    contentDescription = "type.icon", modifier = Modifier.size(80.dp)  )
             }
         }
     }

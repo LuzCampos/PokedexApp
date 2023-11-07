@@ -59,7 +59,6 @@ fun AbilitiesRow(pokemonui: PokemonUi){
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically) {
         Text(text = pokemonui.abilities_0, color = Color(0xFF8C9092))
-        //Text(text = "${pokemonui.primary_type}".toUpperCase())
         Box(
             modifier = Modifier
                 .size(46.dp)
@@ -88,7 +87,6 @@ fun AbilitiesHidden(pokemonui: PokemonUi){
     ) {
         if(pokemonui.abilities_hidden.isNotBlank())  Abilitie(pokemonui = pokemonui, pokemonui.abilities_hidden)
         if(pokemonui.abilities_1.isNotBlank())   Abilitie(pokemonui = pokemonui, abilitie = pokemonui.abilities_1)
-        //Text(text = "${pokemonui.primary_type}".toUpperCase())
     }
 }
 
@@ -104,7 +102,5 @@ fun Abilitie(pokemonui: PokemonUi, abilitie:String){
                     topLeft = Offset(0f, 0f),
                     size = Size(size.width, size.height),
                     cornerRadius = CornerRadius(10.dp.toPx(), 8.dp.toPx())
-                )
-            }
-            .padding(8.dp) )
+                ) }.padding(8.dp) )
 }

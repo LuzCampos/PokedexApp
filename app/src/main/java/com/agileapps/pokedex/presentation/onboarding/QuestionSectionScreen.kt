@@ -12,6 +12,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -37,20 +38,24 @@ fun QuestionSectionScreen(state: QuestionSectionState, navigatoTo : () -> Unit) 
         ) {
             Image(
                 painter = painterResource(id = backgroundResourceId),
-                contentDescription = "",
+                contentDescription = "backgroundResourceId",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
         }
         Column(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 24.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 24.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start
         )
         {
             Text(
-                text = title,
-                modifier = Modifier.align(Alignment.Start).padding(bottom = 24.dp),
+                text = stringResource(id = title),
+                modifier = Modifier
+                    .align(Alignment.Start)
+                    .padding(bottom = 24.dp),
                 color = Color.White,
                 fontSize = 22.sp,
                 lineHeight = 26.sp,
@@ -64,7 +69,7 @@ fun QuestionSectionScreen(state: QuestionSectionState, navigatoTo : () -> Unit) 
                 val textItem = if (isSelected) Color.White else Color(0xff301F84)
 
                 ItemTextTime(
-                    cardTimeItem = cardTimeItem,
+                    cardTimeItem = stringResource(id = cardTimeItem),
                     modifier = Modifier
                         .fillMaxWidth(),
                     color = textItem,
@@ -83,13 +88,16 @@ fun QuestionSectionScreen(state: QuestionSectionState, navigatoTo : () -> Unit) 
 fun ItemTextTime(cardTimeItem : String, modifier: Modifier, color: Color, backgroundColor : Color, onClick : () -> Unit){
     Box(
         modifier = modifier
-            .clip(shape = RoundedCornerShape(6.dp)).shadow(6.dp)
+            .clip(shape = RoundedCornerShape(6.dp))
+            .shadow(6.dp)
             .height(IntrinsicSize.Min)
             .background(backgroundColor)
             .clickable { onClick() },
     ) {
         Text(
-            modifier = Modifier.align(Alignment.BottomStart).padding(top = 48.dp, start = 16.dp, bottom = 14.dp),
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(top = 48.dp, start = 16.dp, bottom = 14.dp),
             text = cardTimeItem,
             fontWeight = FontWeight.W800,
             letterSpacing = 0.sp,

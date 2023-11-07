@@ -1,7 +1,6 @@
 package com.agileapps.pokedex.presentation.detailPokemon.sections
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
@@ -24,7 +23,7 @@ import com.agileapps.pokedex.R
 import com.agileapps.pokedex.presentation.entity.PokemonUi
 
 @Composable
-fun EvolutionSection(pokemonui: PokemonUi, evochain_0_ui: PokemonUi? = null, evochain_2_ui: PokemonUi? = null, evochain_4_ui : PokemonUi? = null) {
+fun EvolutionSection(evochain_0_ui: PokemonUi? = null, evochain_2_ui: PokemonUi? = null, evochain_4_ui : PokemonUi? = null) {
     LazyColumn(modifier = Modifier
         .fillMaxSize()
         .padding(horizontal = 20.dp)) {
@@ -68,25 +67,17 @@ fun EvolutionRow(pokemonui: PokemonUi, pokemonuiAdd:PokemonUi){
 
 @Composable
 fun Evolution(idImg:Int, pokemonName : String){
-    val isSystemInDarkTheme = isSystemInDarkTheme()
-
-    val backgroundColor = if (isSystemInDarkTheme) {
-        Color.White // Utiliza el color de fondo predeterminado del modo noche
-    } else {
-        Color(0xff303943) // Color de fondo en modo claro
-    }
 
     Column( verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Box(modifier = Modifier.weight(4f), contentAlignment = Alignment.Center) {
             Image(
                 modifier = Modifier.height(100.dp),
                 painter = painterResource(id = R.drawable.pokeballbackground),
-                contentDescription = "",
+                contentDescription = "pokeballbackground",
                 colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onPrimary.copy(0.09f))
             )
             Image(
-                modifier = Modifier.size(60.dp),
-                painter = painterResource(idImg), contentDescription = pokemonName
+                modifier = Modifier.size(60.dp), painter = painterResource(idImg), contentDescription = pokemonName
             )
         }
         Spacer(modifier = Modifier.height(6.dp))

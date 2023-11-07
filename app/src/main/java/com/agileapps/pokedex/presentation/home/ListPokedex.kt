@@ -1,6 +1,5 @@
 package com.agileapps.pokedex.presentation.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,13 +9,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.agileapps.pokedex.R
 import com.agileapps.pokedex.presentation.componentes.modalbottomsheet.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.agileapps.pokedex.data.PokemonEntity
@@ -121,12 +115,10 @@ fun ListScreen(navController: NavController, homeViewModel: HomeViewModel = hilt
                     ) {
                             SearchComponent(searchText = searchText, homeViewModel = homeViewModel ,
                                 modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp).padding(bottom = 20.dp)
-                                    //.height(50.dp)
                             )
                         PokedexGrid(
                             pokemonesLista = pokemonesLista,
                             modifier = Modifier.fillMaxWidth().padding(it)
-                            //.height(200.dp)
                             ,
                             navController = navController
                         )
@@ -138,44 +130,4 @@ fun ListScreen(navController: NavController, homeViewModel: HomeViewModel = hilt
         }
     }
 }
-
-
-@Composable
-fun PokedexSuccess(pokemons: List<PokemonEntity>, modifier: Modifier = Modifier,navController: NavController) {
-    PokedexGrid(pokemonesLista = pokemons, modifier,navController)
-}
-
-@Composable
-fun PokedexError(tryAgain: String, modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .semantics {
-                contentDescription = "Error"
-            },
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Image(
-            painterResource(R.drawable.meowth),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(.4f)
-        )
-        Text(stringResource(id = R.string.msg_error_generic))
-        TextButton(onClick = {  }) {
-            Text(stringResource(id = R.string.msg_try_again))
-        }
-    }
-}
-
-@Composable
-fun PokedexLoading(modifier: Modifier = Modifier) {
-    Box(modifier = modifier
-        .fillMaxSize()
-        .semantics { contentDescription = "Loading Indicator" }
-    ) {
-        CircularProgressIndicator(Modifier.align(Alignment.Center))
-    }
-}
-
 

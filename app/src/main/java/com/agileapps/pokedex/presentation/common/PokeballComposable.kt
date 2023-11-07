@@ -25,7 +25,7 @@ fun BoxScope.PokeBallBackground(color: Color){
         Image(
             modifier = Modifier.size(274.dp).align(Alignment.TopEnd),
             painter = painterResource(R.drawable.pokeballbackground),
-            contentDescription = "Pokeball Shadow",
+            contentDescription = "PokeballShadow",
             colorFilter = ColorFilter.tint(color = color.copy(0.06f))
         )
     }
@@ -49,7 +49,7 @@ fun PokemonImage(
 fun PokeballImage(modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(R.drawable.pokeball),
-        contentDescription = null,
+        contentDescription = "PokeballImage",
         modifier = modifier.size(width = 88.dp, height = 76.dp),
     )
 }

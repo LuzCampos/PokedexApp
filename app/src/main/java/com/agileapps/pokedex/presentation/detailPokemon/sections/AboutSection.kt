@@ -25,7 +25,6 @@ fun AboutSection(pokemonui: PokemonUi) {
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 6.dp, vertical = 8.dp),
-        //contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ){
         item { Description(pokemonui.description) }

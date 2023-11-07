@@ -4,45 +4,47 @@ import androidx.annotation.DrawableRes
 import com.agileapps.pokedex.R
 
 data class QuestionSectionState(
-    val question : String,
-    val answers : List<String>,
+    val question : Int,
+    val answers : List<Int>,
     @DrawableRes val backgroundScreen : Int,
 )
 
-val pokemontyp = QuestionSectionState(
-    question = "Which Pokemon type do you find most fascinating?",
-    answers = listOf("Fire", "Water", "Grass", "Electric"),
+val pokemonTypes = QuestionSectionState(
+    question = R.string.msg_question_pokemonTyp,
+    answers = listOf(R.string.msg_fire,R.string.msg_water, R.string.msg_grass, R.string.msg_electric),
     backgroundScreen = R.drawable.bg_water_2
 )
 
-val pokemonabilitie = QuestionSectionState(
-    question = "What kind of Pokemon abilities do you prefer?",
-    answers = listOf("Offensive (e.g., Fire Blast, Thunderbolt)",
-            "Defensive (e.g., Protect, Recover)",
-            "Balanced (a mix of offense and defense)",
-            "Status Effect (e.g., Sleep Powder, Toxic)"),
+val pokemonAbilities = QuestionSectionState(
+    question = R.string.msg_question_pokemonAbilities,
+    answers = listOf(R.string.msg_answerOne_pokemonAbilities,
+            R.string.msg_answerTwo_pokemonAbilities,
+            R.string.msg_answerThree_pokemonAbilities,
+            R.string.msg_answerFour_pokemonAbilities),
     backgroundScreen = R.drawable.bg_nigth_2
 )
-val pokemonregion = QuestionSectionState(
-    question = "Which Pokemon region intrigues you the most?",
-    answers = listOf("Kanto","Johto","Hoenn","Sinnoh"),
+val pokemonRegion = QuestionSectionState(
+    question = R.string.msg_question_pokemonRegion,
+    answers = listOf(R.string.msg_answerOne_pokemonRegion,
+        R.string.msg_answerTwo_pokemonRegion,
+        R.string.msg_answerThree_pokemonRegion,
+        R.string.msg_answerFour_pokemonRegion),
     backgroundScreen = R.drawable.bg_sunset_beatiful
 )
 
-val pokemonrarity = QuestionSectionState(
-    question = "What's your favorite Pokemon rarity level?",
-    answers = listOf("Common (e.g., Pidgey, Rattata)",
-            "Uncommon (e.g., Growlithe, Abra)",
-            "Rare (e.g., Snorlax, Lapras)", "Legendary/Mythical (e.g., Mewtwo, Arceus)"),
+val pokemonRarity = QuestionSectionState(
+    question = R.string.msg_question_pokemonRarity,
+    answers = listOf(R.string.msg_answerOne_pokemonRarity,
+            R.string.msg_answerTwo_pokemonRarity,
+            R.string.msg_answerThree_pokemonRarity,
+        R.string.msg_answerFour_pokemonRarity),
     backgroundScreen = R.drawable.bg_daylight
 )
 
-val pokemongames = QuestionSectionState(
-    question = "What aspect of Pokemon games excites you the most?",
-    answers = listOf("Battling other trainers",
-            "Exploring new regions and environments",
-            "Collecting different Pokemon species",
-            "Solving puzzles and challenges"),
+val pokemonGames = QuestionSectionState(
+    question = R.string.msg_question_pokemonGames,
+    answers = listOf(R.string.msg_answerOne_pokemonGames,R.string.msg_answerTwo_pokemonGames,
+    R.string.msg_answerThree_pokemonGames,R.string.msg_answerFour_pokemonGames),
     backgroundScreen = R.drawable.bg_water_3
 )
 

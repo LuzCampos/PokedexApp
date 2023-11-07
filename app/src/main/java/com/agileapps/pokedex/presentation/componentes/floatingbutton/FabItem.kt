@@ -5,19 +5,19 @@ import com.agileapps.pokedex.presentation.componentes.modalbottomsheet.BottomShe
 
 class FabItem(
     val icon: Int,
-    val label:String,
+    val label:Int,
     val identifier:String
 )
 
 val items = listOf(
     FabItem(
         icon = R.drawable.pokeballicon,
-        label = "All Type",
+        label = R.string.msg_fabItem_types,
         identifier = BottomSheetType.TYPE.name
     ),
     FabItem(
         icon = R.drawable.pokeballicon,
-        label = "All Gen",
+        label = R.string.msg_fabItem_gen,
         identifier = BottomSheetType.GENERATION.name
     )
 )

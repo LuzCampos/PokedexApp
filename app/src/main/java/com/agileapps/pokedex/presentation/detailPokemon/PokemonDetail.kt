@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -98,12 +97,7 @@ fun Contenido(pokemon : PokemonEntity, pokemonEvo0: PokemonEntity?, pokemonEvo2:
         LocalConfiguration.current.screenHeightDp.dp
     }
 
-    val isSystemInDarkTheme = isSystemInDarkTheme()
-
-    val pokeballColor = if(isSystemInDarkTheme) { Color.Transparent } else { Color(0xffFFFFFF) }
-
     val sheetPeekHeight: Dp = screenHeightDp * fraction
-
     val icon = if(isDarkTheme) {R.drawable.iconday} else {R.drawable.iconnight}
 
     PokedexAppTheme(
@@ -166,7 +160,7 @@ fun Contenido(pokemon : PokemonEntity, pokemonEvo0: PokemonEntity?, pokemonEvo2:
                         .fillMaxHeight(0.46f),
                         verticalArrangement = Arrangement.Bottom,
                         horizontalAlignment = Alignment.CenterHorizontally) {
-                        PokemonImage(pokemon = pokemonUi, color = pokeballColor)
+                        PokemonImage(pokemon = pokemonUi)
                     }
                 }
             }
@@ -266,7 +260,6 @@ private fun PowerChip(text: String) {
 
 @Composable
 private fun SectionContent(pokemonui: PokemonUi, pokemonuievo0: PokemonUi? = null, pokemonuievo2: PokemonUi? = null, pokemonuievo4: PokemonUi? = null){
-
     Surface(
         modifier = Modifier
             .background(MaterialTheme.colors.onBackground)
@@ -281,12 +274,7 @@ private fun SectionContent(pokemonui: PokemonUi, pokemonuievo0: PokemonUi? = nul
             var section by remember { mutableStateOf(Sections.BaseStats) }
             TabRow(selectedTabIndex = section.ordinal,
                 divider = {
-                    Divider(
-                        modifier = Modifier.padding(horizontal = 30.dp),
-                        //color = Color.Red,
-                        color = MaterialTheme.colors.onBackground,
-                        thickness = 1.dp
-                    )
+                    Divider(modifier = Modifier.padding(horizontal = 30.dp), color = MaterialTheme.colors.onBackground, thickness = 1.dp)
                 },
                 indicator = {
                     TabRowDefaults.Indicator(
@@ -314,7 +302,7 @@ private fun SectionContent(pokemonui: PokemonUi, pokemonuievo0: PokemonUi? = nul
                 when (section) {
                     Sections.About -> AboutSection(pokemonui)
                     Sections.BaseStats -> BaseStatsSection(pokemonui)
-                    Sections.Evolution -> EvolutionSection(pokemonui, pokemonuievo0, pokemonuievo2, pokemonuievo4)
+                    Sections.Evolution -> EvolutionSection(pokemonuievo0, pokemonuievo2, pokemonuievo4)
                     Sections.Moves -> MovesSection(pokemonui)
                 }
             }
@@ -348,11 +336,9 @@ fun PokeballSpinning(color: Color){
             repeatMode = RepeatMode.Restart
         )
     )
-    Box(modifier = Modifier
-        .size(200.dp), contentAlignment = Alignment.Center) {
+    Box(modifier = Modifier.size(200.dp), contentAlignment = Alignment.Center) {
         Image(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
                 .graphicsLayer(rotationZ = rotationAngle),
             painter = painterResource(id = R.drawable.pokeballbackground),
             contentDescription = "",
@@ -362,13 +348,13 @@ fun PokeballSpinning(color: Color){
 }
 
 @Composable
-private fun PokemonImage(pokemon: PokemonUi, color: Color) {
+private fun PokemonImage(pokemon: PokemonUi) {
     Box(modifier = Modifier.size(200.dp), contentAlignment = Alignment.Center) {
         Image(
             modifier = Modifier.size(150.dp),
             painter = painterResource(id = pokemon.pokemonDrawableResourceId),
             alpha = 1.0f,
-            contentDescription = ""
+            contentDescription = "pokemonDrawableResourceId"
         )
     }
 }
